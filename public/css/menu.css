@@ -1,0 +1,31 @@
+.left-menu {
+  background: var(--merco);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 300;
+  transition: all 0.4s ease;
+  box-shadow: 20px 0px 20px 20px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+.contieneItemsMenu {
+  margin-top: 100px;
+  margin-left: 20px;
+  padding: 10vw;
+  min-width: 60vw;
+}
+.menu-superior {
+  z-index: 301 !important;
+
+}
+.menu-closed {
+  transform: translate(-100%);
+  box-shadow: none;
+}
+.blanco {
+  color: #ffffff !important;
+}
+.nav-item {
+  list-style: none;
+}
