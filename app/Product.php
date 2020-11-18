@@ -18,7 +18,7 @@ class Product extends Model
     const LATITUDE  = 'lat';
     const LONGITUDE = 'long';
 
-    protected $with = ["images","sizes","category","sections"];
+    protected $with = ["images","sizes","category","sections","allergies"];
 
     protected $appends = ["business_name"];
 
@@ -71,6 +71,12 @@ class Product extends Model
     public function sections()
     {
       return $this->belongsToMany('App\Section');
+    }
+
+    // alergias que tiene el producto
+    public function allergies()
+    {
+      return $this->belongsToMany('App\Allergy','product_allergy', 'product_id', 'allergy_id');
     }
 
     public function getBusinessNameAttribute()

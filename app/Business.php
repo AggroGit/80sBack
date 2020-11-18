@@ -19,12 +19,12 @@ class Business extends Model
 
 
     protected $table = "business";
-    protected $with = ["images","schedules",'category'];
+    protected $with = ["images","schedules"];
     protected $appends = ["today",'mediaScore','totalScores'];
     protected static $kilometers = true;
 
     protected $fillable = [
-        'email', 'name', 'description', 'category_id', 'latitude','longitude', 'phone', 'direction', 'link'
+        'email', 'name', 'description', 'latitude','longitude', 'phone', 'direction', 'link'
     ];
 
     protected $casts = [

@@ -26,7 +26,7 @@ class CreateOrder extends Migration
             $table->string('price_per');
             $table->string('description')->nullable();
             // pay in hand?
-            $table->boolean('pay_in_hand')->nullable();
+            $table->boolean('pay_in_hand')->default(false);
             // user
             $table->integer('user_id')
                   ->references('id')
@@ -81,14 +81,14 @@ class CreateOrder extends Migration
             $table->double('total_price', 8, 2); // el precio que se cobra al cliente
             $table->string('stripe_payment_id')->nullable(); // el id del pago al cliente
             $table->string('stripe_refound_id')->nullable(); // en caso que se devuelva
-            $table->string('status')->default('pending');
+            $table->string('status')->default('pending');// pending, coming, delivered
             $table->integer('payment_tries')->default(0);
             $table->timestamp('nextTry')->nullable();
             $table->double('stripe_commisions', 8, 2)->nullable();
             $table->double('merco_commisions', 8, 2)->nullable();
             // solo será true cuando se efectúe las transferencias
             $table->boolean('completed')->default(false);
-            $table->boolean('pay_in_hand');
+            $table->boolean('pay_in_hand')->default(false);
             // the user
             $table->integer('user_id')
                   ->references('id')

@@ -209,9 +209,9 @@ class staPerpetuaController extends Controller
       return $p;
     }
 
-    public function listDiscountsByBusiness($business_id)
+    public function listDiscountsByBusiness()
     {
-      if($business = Business::find($business_id)) {
+      if($business = Business::find(1)) {
         return $this->correct($business->discounts);
       }
       return $this->incorrect();

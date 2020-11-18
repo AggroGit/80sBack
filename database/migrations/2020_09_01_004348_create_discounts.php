@@ -18,11 +18,11 @@ class CreateDiscounts extends Migration
             $table->string('title')->nullable();
             $table->string('subtitle')->nullable();
             $table->integer('business_id')
+                  ->default(1)
                   ->references('id')
                   ->on('business')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
-            $table->integer('cost_points');
             $table->integer('percentage_dicount');
             $table->timestamps();
         });

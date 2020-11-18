@@ -324,7 +324,6 @@ class profesionalController extends Controller
       $orders->update([
         "status" => "completed"
       ]);
-      $purchase->checkIfAllCompleted();
       return $this->correct();
       // return $this->correct($orders->get());
     }

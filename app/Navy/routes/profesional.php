@@ -9,11 +9,9 @@
 	|
 	*/
   Route::any('/prof',                                         'profesionalController@index');
-  Route::any('/prof/create',                                  'profesionalController@createBusiness');
 
   Route::group(['middleware' => 'isProf'], function()
   {
-
 
   Route::any('/prof/{business_id}',                               'profesionalController@business');
   Route::any('/prof/{business_id}/edit',                          'profesionalController@editBusiness');

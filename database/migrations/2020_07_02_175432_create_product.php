@@ -29,12 +29,14 @@ class CreateProduct extends Migration
                   ->default("unit");
             //
             $table->integer('business_id')
+                  ->default(1)
                   ->references('id')
                   ->on('business')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
             //
             $table->integer('category_id')
+                  ->nullable()
                   ->references('id')
                   ->on('categories')
                   ->onDelete('cascade')

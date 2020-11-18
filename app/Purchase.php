@@ -21,11 +21,10 @@ class Purchase extends Model
     //
     //
     protected $fillable = [
-      'user_id', 'total_price', 'stripe_payment_id', 'pay_in_hand'
+      'user_id', 'total_price', 'stripe_payment_id'
     ];
 
     protected $casts = [
-        'pay_in_hand' => 'boolean',
         'completed'   => 'boolean'
     ];
 
@@ -144,10 +143,10 @@ class Purchase extends Model
         $this->stripe_payment_id = $charge_id;
         // get the commisions
         $stripeComission = $this->user->getStripeCommisionFromCharge($charge->asStripePaymentIntent());
-        $ourComission = round($stripeComission*0.3,2);
+        // $ourComission = round($stripeComission*0.3,2);
         //
         $this->stripe_commisions = $stripeComission;
-        $this->merco_commisions = $ourComission;
+        // $this->merco_commisions = $ourComission;
         //
         $this->save();
         return true;
@@ -220,28 +219,14 @@ class Purchase extends Model
       }
     }
 
-    // mira si todas las órdenes están completadas
+    // las marca como completada
     public function checkIfAllCompleted()
     {
-      $check = true;
-      $this->refresh();
-      foreach ($this->orders()->where('status','!=','canceled')->get() as $order) {
-        if($order->status !== 'completed') {
-          $check = false;
-        }
-      }
-      if($check) {
-        if($this->pay_in_hand) {
-          $this->completed = true;
-          $this->status = "finished";
-          $this->save();
-        } else {
-          jobPurchase::dispatch($this->id);
-        }
-        if($this->user->association and $this->user->association->searchName == "staPerpetua") {
-          $this->PointsIfStaPerpetua();
-        }
-      }
+
+      $this->completed = true;
+      $this->status = "finished";
+      $this->save();
+
     }
 
 

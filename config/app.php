@@ -69,6 +69,8 @@ return [
 
     'timezone' => 'Europe/Madrid',
 
+
+
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration

@@ -314,6 +314,13 @@ class HomeController extends Controller
       ]);
     }
 
+    public function reserve(Request $request)
+    {
+      if ($missings = $this->hasError($request->all(),'validation.reserve')) {
+        return $this->incorrect(0,$missings);
+      }
+    }
+
 
 
 

@@ -171,7 +171,6 @@ return [
     ],
 
     'buy'   =>    [
-      'pay_in_hand' => 'required|boolean'
     ],
 
     'addCreditCard'   => [
@@ -191,7 +190,8 @@ return [
       'phone'         => 'string',
       'email'         => 'string|email|unique:users',
       'direction'     => 'string',
-      'profileImage'  => 'image|mimes:jpg,jpeg,png'
+      'profileImage'  => 'image|mimes:jpg,jpeg,png',
+      'birthday'      => 'date'
 
     ],
 
@@ -254,6 +254,11 @@ return [
     'removeProducts'  => [
       'ids'     =>  'required|array',
           'ids.*'        => 'required|integer'
+    ],
+
+    'reserve'  => [
+      'time'     =>  'required|date_format:H:i',
+      'date'      => 'required|date'
     ],
 
 

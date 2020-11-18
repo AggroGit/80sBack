@@ -33,11 +33,7 @@ class CreateBusiness extends Migration
                   ->onDelete('cascade')
                   ->onUpdate('cascade')
                   ->nullable();
-            $table->integer('category_id')
-                  ->references('id')
-                  ->on('categories')
-                  ->onDelete('cascade')
-                  ->onUpdate('cascade');
+          
             $table->timestamps();
         });
         // horario de la tienda

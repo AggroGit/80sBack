@@ -15,6 +15,7 @@ use App\Traits\Perpetua;
 use App\Traits\Notify;
 use App\Jobs\sendMail;
 use App\Association;
+use Carbon\Carbon;
 use App\Purchase;
 
 
@@ -33,7 +34,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'phone', 'longitude', 'latitude', 'direction', 'device_token'
+        'name', 'email', 'admin', 'password', 'phone', 'longitude', 'latitude', 'direction', 'device_token', 'birthday'
     ];
 
     /**
@@ -207,39 +208,53 @@ class User extends Authenticatable
 
     public function buyShoppingCart($request, &$purchase)
     {
+      // solo si la hora del local se ecncuentra dentro
+      if(Business::find(1)->today->count() == 0) {
+        return 811;
+      }
+
       // recogemos las ordenes y su precio. Hacemos el cargo de Stripe y si todo va bien entonces se añaden en un purchase
       // cogemos las ordenes seleccionadas.
       $orders = $this->shoppingCart()->pluck('id');
-      if($request->pay_in_hand == false and auth()->user()->hasDefaultPaymentMethod()==false) {
+      if(auth()->user()->hasDefaultPaymentMethod()==false) {
         return 200;
       }
       $price = $this->shoppingCart->sum('price');
+      // si es su cumpleaños le hacemos una ofert
       if(($price < env('MIN_BUY',5))) {
         return 205;
+      }
+      // oferta
+      if(auth()->user()->birthday and Carbon::parse(auth()->user()->birthday)->isBirthday()) {
+        $price = round($price*0.9,2);
       }
       // ahora ponemos en estado de loading
       $news = $this->shoppingCart()->update(['status' =>'loading']);
       $charge_id = null;
-
-
       // si llegamos hasta aqui es que todo ha ido bien,
       // asi que hemos de crear el purchase
       $purchase = new Purchase([
         "user_id"             => auth()->user()->id,
         "total_price"         => $price,
-        "stripe_payment_id"   => $charge_id,
-        "pay_in_hand"         => $request->pay_in_hand
+        "stripe_payment_id"   => $charge_id
       ]);
       // save the purchase
       $purchase->save();
+      // cobramos
+      if(!$purchase->CobrarCliente()) {
+        // si el cobro sale mal devolvemos un error y eliminamos el purchae
+        $purchase->delete();
+        // devolvemos código de error
+        return 201;
+      }
       // now, update the orders to pending
       $this->orders()->whereIn('id',$orders)->update([
         'status'        => 'pending',
         'purchase_id'   => $purchase->id,
-        'pay_in_hand'   => $request->pay_in_hand
       ]);
 
       $purchase->mails();
+      // paso de referencia
       $purchase = $purchase->id;
       return true;
     }

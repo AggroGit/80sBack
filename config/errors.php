@@ -21,7 +21,7 @@ return [
     "9"     =>    "unknown error",
     "13"    =>    "User no logged",
     "14"    =>    "User almost has a business",
-
+    "15"    =>    "Cannot change your birthday twice",
     "97"    =>    "Update the App",
     "99"    =>    "Code of the App is not corresponding",
 
@@ -43,6 +43,7 @@ return [
     "804"   =>    "business doesnt exists",
     "809"   =>    "business have done this process",
     "810"   =>    "cant review more than 1",
+    "811"   =>    "Business is closed",
 
     //900 products
     "900"   =>    "product not found",

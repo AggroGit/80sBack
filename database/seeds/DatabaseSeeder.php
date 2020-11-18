@@ -19,58 +19,32 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $aso = new Association();
-        $aso->name = "sta perpetua";
-        $aso->searchName = "staPerpetua";
-        $aso->save();
-
-        // $this->call(UserSeeder::class);
-        // user admin
-        $new = new User;
-        $new->name = "Alex";
-        $new->card_last_four = "1234";
-        $new->card_brand = "Visa";
-        $new->stripe_id = "cus_HtPt46MFbYYfgr";
-        $new->email = "poropo97@gmail.com";
-        $new->type = "admin";
-        $new->password = bcrypt("123456789");
-        $new->save();
-        // user admin
-        $new2 = new User;
-        $new2->name = "Juan";
-        $new2->email = "admin2@gmail.com";
-        $new2->password = bcrypt("123456789");
-        $new2->save();
-        // chat
-        $chat = new Chat();
-        $chat->save();
-        // add users
-        $chat->addUser($new2);
-        $chat->addUser($new);
-        // a message
-        $message = new Message([
-          "user_id" => $new->id,
-          "message" => "Hola caracola!",
-          "chat_id" => $chat->id,
-
+        // el usuario administrador
+        $user = new User([
+          "name"      => "admin",
+          "email"     => "admin@gmail.com",
+          "password"  =>  bcrypt('123456789'),
+          "phone"     => "1234567",
+          "direction" => "Barcelona, calle piruleta",
+          "type"      => "admin"
         ]);
-        $message->save();
-
-
-        $new = new News([
-          "title"     => "Esto es un titulo de prueba",
-          "subtitle"  => "Subtitulo",
-          "team"      => "El baix Llobregat",
-          "image_id"  => 1,
-          "text"      => "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        // test user
+        $user->stripe_id = "cus_HtPt46MFbYYfgr":
+        $user->card_last_four = "4242";
+        $user->card_brand = "Visa";
+        $user->save();
+        // creamos el negocio único
+        $restaurante = new Business([
+          "email"       => "restaurante@gmail.com",
+          "name"        => "Vuitantas 80's",
+          "description" => "Descripción",
+          "link"        => "merco.app",
+          "user_id"     => $user->id
         ]);
-        $new->save();
-
+        $restaurante->save();
         // finally we call the passport
         Artisan::call('passport:install');
-        Artisan::call('db:seed --class=ProductSeeder');
-        // call the category
-        Artisan::call('db:seed --class=CategorySeeder');
+
 
     }
 }

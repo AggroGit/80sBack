@@ -276,6 +276,13 @@ class AuthController extends Controller
       if($request->has('password'))
       $request->password = bcrypt($request->password);
       //
+      // si el usuario quiere cambiar la fecha de nacimiento
+      if($request->has('birthday')) {
+        if($user->birthday_changed) {
+          return $this->incorrect(15);
+        }
+        $user->birthday_changed = true;
+      }
       $user->fill($request->all());
       // y la imagen
       if($request->has('profileImage')) {

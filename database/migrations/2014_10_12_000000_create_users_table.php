@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('direction')->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->date('birthday')->nullable();
             $table->string('password')->nullable();
             $table->boolean('invited')
                   ->default(false);
@@ -30,6 +31,7 @@ class CreateUsersTable extends Migration
             $table->boolean('payment_bloked')->default(false);
             $table->string('stripe_reciver_id')->nullable();
             $table->rememberToken();
+            $table->boolean('birthday_changed')->default(false);
             $table->string('type')
                   ->nullable()
                   ->default('client');
@@ -43,15 +45,7 @@ class CreateUsersTable extends Migration
                   ->onDelete('cascade')
                   ->onUpdate('cascade')
                   ->nullable();
-            $table->integer('association_id')
-                  ->references('id')
-                  ->on('associations')
-                  ->onDelete('cascade')
-                  ->onUpdate('cascade')
-                  ->nullable();
             $table->timestamps();
-            $table->boolean('staPerpetuaAdmin')
-                  ->default(false);
             // sta perpetua puntos
             $table->integer('staPerpetuaPoints')
                   ->default(0);

@@ -12,9 +12,9 @@ use App\Chat;
 class ProductsContoller extends Controller
 {
     //
-    public function business($business_id,Request $request)
+    public function business(Request $request)
     {
-      if($business = Business::distance(auth()->user()->latitude, auth()->user()->longitude)->find($business_id)) {
+      if($business = Business::distance(auth()->user()->latitude, auth()->user()->longitude)->find(1)) {
         $sections = $business->sections->toArray();
         foreach ($sections as $key => $section) {
           $sections[$key]['products'] = Section::find($sections[$key]['id'])->products()->where('products.business_id',$business_id)->get();
@@ -80,7 +80,7 @@ class ProductsContoller extends Controller
     //
     public function getSections($business_id)
     {
-      if($business = Business::find($business_id)) {
+      if($business = Business::find(1)) {
         return $this->correct($business->sections);
       }
     }
