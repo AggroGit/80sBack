@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
           "type"      => "admin"
         ]);
         // test user
-        $user->stripe_id = "cus_HtPt46MFbYYfgr":
+        $user->stripe_id = "cus_HtPt46MFbYYfgr";
         $user->card_last_four = "4242";
         $user->card_brand = "Visa";
         $user->save();
