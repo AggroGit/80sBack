@@ -215,13 +215,11 @@ class User extends Authenticatable
     public function buyShoppingCart($request, &$purchase)
     {
       // solo si la hora del local se ecncuentra dentro
-      if(Business::find(1)->today->count() == 0) {
-        return 811;
-      }
+      // if(Business::find(1)->today->count() == 0) {
+      //   return 811;
+      // }
       $cumple = false;
       $discount = null;
-
-
       // recogemos las ordenes y su precio. Hacemos el cargo de Stripe y si todo va bien entonces se añaden en un purchase
       // cogemos las ordenes seleccionadas.
       $orders = $this->shoppingCart()->pluck('id');
@@ -235,7 +233,7 @@ class User extends Authenticatable
       }
       // si el usuario tiene un descuento, vemos si es valido y lo aplicamos
       if(auth()->user()->discount and auth()->user()->discount->validateDicount())  {
-        $t = (100-$discount->percentage_dicount)/100;
+        $t = (100-auth()->user()->discount->percentage_dicount)/100;
         $price = round($price * $t,2);
         $discount = auth()->user()->discount->id;
       }
@@ -272,7 +270,8 @@ class User extends Authenticatable
         'status'        => 'pending',
         'purchase_id'   => $purchase->id,
       ]);
-
+      auth()->user()->discount_id = null;
+      auth()->user()->save();
       $purchase->mails();
       // paso de referencia
       $purchase = $purchase->id;

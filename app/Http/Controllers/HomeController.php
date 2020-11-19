@@ -330,12 +330,20 @@ class HomeController extends Controller
     }
 
     // listamos los descuentos disponibles
-    public function applyDiscount($discount_id)
+    public function addDiscount($discount_id)
     {
       if(!$discount = Discount::find($discount_id)) {
         return $this->incorrect(1400);
       }
-      
+      if(!$discount->validateDicount()) {
+        auth()->user()->discount_id = null;
+        auth()->user()->save();
+        return $this->incorrect(1401);
+      }
+      auth()->user()->discount_id = $discount_id;
+      auth()->user()->save();
+      return $this->correct($discount);
+
     }
 
 

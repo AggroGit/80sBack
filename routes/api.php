@@ -38,7 +38,7 @@ Enterprise::auth();
 Enterprise::business();
 
 Route::any('/discounts',                      'HomeController@listDiscounts'); //done
-Route::any('/discounts/{discount_id}/apply',  'HomeController@listDiscounts'); //done
+Route::any('/discounts/{discount_id}/add',    'HomeController@addDiscount'); //done
 
 
 Route::any('/notification',                     'TestController@sendPush');

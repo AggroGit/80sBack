@@ -19,7 +19,7 @@ class Discount extends Model
     // si su fecha es valida se usa, sino no
     public function validateDicount()
     {
-      if(Carbon::parse($this->expires_at)<= Carbon::now()->toDateString()) {
+      if(Carbon::parse($this->expires_at)->toDateString()>= Carbon::now()->toDateString()) {
         return true;
       }
       return false;
