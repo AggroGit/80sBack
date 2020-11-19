@@ -7,12 +7,14 @@ use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Http\Request;
 use App\Events\StripeEvent;
 use App\Events\MessageEvent;
+use App\Discount;
 use App\Category;
 use App\Business;
 use App\Product;
 use App\Section;
-use App\Image;
 use App\Message;
+use App\Image;
+
 
 class HomeController extends Controller
 {
@@ -319,6 +321,21 @@ class HomeController extends Controller
       if ($missings = $this->hasError($request->all(),'validation.reserve')) {
         return $this->incorrect(0,$missings);
       }
+    }
+
+    // listamos los descuentos disponibles
+    public function listDiscounts()
+    {
+      return $this->correct(Discount::orderBy('created_at','desc')->get());
+    }
+
+    // listamos los descuentos disponibles
+    public function applyDiscount($discount_id)
+    {
+      if(!$discount = Discount::find($discount_id)) {
+        return $this->incorrect(1400);
+      }
+      
     }
 
 

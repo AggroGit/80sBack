@@ -88,7 +88,14 @@ class CreateOrder extends Migration
             $table->double('merco_commisions', 8, 2)->nullable();
             // solo será true cuando se efectúe las transferencias
             $table->boolean('completed')->default(false);
+            $table->boolean('birthday')->default(false);
             $table->boolean('pay_in_hand')->default(false);
+            $table->integer('discount_id')
+                  ->references('id')
+                  ->on('discounts')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade')
+                  ->nullable();
             // the user
             $table->integer('user_id')
                   ->references('id')

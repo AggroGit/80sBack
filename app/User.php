@@ -25,7 +25,7 @@ class User extends Authenticatable
     //
     protected static $kilometers = true;
     //
-    protected $with = ['business','notifications','image'];
+    protected $with = ['business','notifications','image','discount'];
     protected $appends = ['loggedSocial'];
 
     /**
@@ -70,6 +70,12 @@ class User extends Authenticatable
     public function business()
     {
       return $this->hasOne('App\Business');
+    }
+
+    // si el usuario es profesional tendrá un negocio
+    public function discount()
+    {
+      return $this->belongsTo('App\Discount');
     }
 
     public function purchases()
@@ -212,6 +218,9 @@ class User extends Authenticatable
       if(Business::find(1)->today->count() == 0) {
         return 811;
       }
+      $cumple = false;
+      $discount = null;
+
 
       // recogemos las ordenes y su precio. Hacemos el cargo de Stripe y si todo va bien entonces se añaden en un purchase
       // cogemos las ordenes seleccionadas.
@@ -224,9 +233,18 @@ class User extends Authenticatable
       if(($price < env('MIN_BUY',5))) {
         return 205;
       }
+      // si el usuario tiene un descuento, vemos si es valido y lo aplicamos
+      if(auth()->user()->discount and auth()->user()->discount->validateDicount())  {
+        $t = (100-$discount->percentage_dicount)/100;
+        $price = round($price * $t,2);
+        $discount = auth()->user()->discount->id;
+      }
+
       // oferta
       if(auth()->user()->birthday and Carbon::parse(auth()->user()->birthday)->isBirthday()) {
+
         $price = round($price*0.9,2);
+        $cumple = true;
       }
       // ahora ponemos en estado de loading
       $news = $this->shoppingCart()->update(['status' =>'loading']);
@@ -236,7 +254,9 @@ class User extends Authenticatable
       $purchase = new Purchase([
         "user_id"             => auth()->user()->id,
         "total_price"         => $price,
-        "stripe_payment_id"   => $charge_id
+        "stripe_payment_id"   => $charge_id,
+        "birthday"            => $cumple, // si se ha aplicado cumpleaños
+        "discount_id"         => $discount // si se ha aplicado descuento
       ]);
       // save the purchase
       $purchase->save();

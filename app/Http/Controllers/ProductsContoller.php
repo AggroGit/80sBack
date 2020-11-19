@@ -17,7 +17,7 @@ class ProductsContoller extends Controller
       if($business = Business::distance(auth()->user()->latitude, auth()->user()->longitude)->find(1)) {
         $sections = $business->sections->toArray();
         foreach ($sections as $key => $section) {
-          $sections[$key]['products'] = Section::find($sections[$key]['id'])->products()->where('products.business_id',$business_id)->get();
+          $sections[$key]['products'] = Section::find($sections[$key]['id'])->products()->where('products.business_id',1)->get();
         }
         return $this->correct([
           "info"            => $business,

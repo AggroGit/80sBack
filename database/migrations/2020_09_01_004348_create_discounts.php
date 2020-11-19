@@ -17,6 +17,7 @@ class CreateDiscounts extends Migration
             $table->id();
             $table->string('title')->nullable();
             $table->string('subtitle')->nullable();
+            $table->date('expires_at');
             $table->integer('business_id')
                   ->default(1)
                   ->references('id')

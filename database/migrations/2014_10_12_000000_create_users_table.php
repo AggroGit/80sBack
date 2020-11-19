@@ -45,6 +45,12 @@ class CreateUsersTable extends Migration
                   ->onDelete('cascade')
                   ->onUpdate('cascade')
                   ->nullable();
+            $table->integer('discount_id')
+                  ->references('id')
+                  ->on('discounts')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade')
+                  ->nullable();
             $table->timestamps();
             // sta perpetua puntos
             $table->integer('staPerpetuaPoints')
