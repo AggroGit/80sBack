@@ -206,7 +206,7 @@ class Product extends Model
         'headers' => [
           'Nombre' =>  'name',
           'Precio'  => 'price',
-
+          'Descripción'  => 'description',
           'Categoría' => [
             'model_name' => 'section',
             'select'     => Section::all(), // data al seleccionar en crear

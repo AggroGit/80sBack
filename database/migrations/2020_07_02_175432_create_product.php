@@ -18,7 +18,7 @@ class CreateProduct extends Migration
             $table->string('name')
                   ->nullable();
             $table->string('description')
-                  ->nullable();
+                  ->default("d");
             $table->boolean('hidden')->default(false);
             $table->double('price', 8, 2)->nullable();
             $table->double('offer_price', 8, 2)->nullable();
