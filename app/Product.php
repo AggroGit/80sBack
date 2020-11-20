@@ -205,11 +205,13 @@ class Product extends Model
       return [
         'headers' => [
           'Nombre' =>  'name',
+          'Precio'  => 'price',
 
           'Categoría' => [
             'model_name' => 'section',
             'select'     => Section::all(), // data al seleccionar en crear
             'show'       => 'name',
+            'multiple'   => true,
             'url'        => "admin/section/edit"
           ],
         ],

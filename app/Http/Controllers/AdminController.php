@@ -85,7 +85,7 @@ class AdminController extends Controller
           $model[$key] = $value;
           else {
               $model->save();
-              
+
               // para un multiselect
               $a = $model->{$key.'s'}()->sync($value);
           }

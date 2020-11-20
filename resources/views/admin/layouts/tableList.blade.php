@@ -58,7 +58,8 @@
                             <td>
                               <!-- RELACIONES A 1-->
                               @if(isset($header['model_name']))
-                                @if($header['multiple']?? false)
+
+                                @if(!$header['multiple']?? false)
                                   @if($header['url']?? false)
                                     <a href="{{url($header['url'])}}/{{$data[$header['model_name']]['id']?? ""}}">
                                       {{$data[$header['model_name']][$header['show']]?? ""}}
@@ -67,13 +68,16 @@
                                     {{$data[$header['model_name']][$header['show']]?? ""}}
                                   @endif
                                 @else
+
                                 <!-- RELACIONES A MUCHOS-->
-                                  {{$data->{'sections'}}}
+                                @foreach($data->{$header['model_name'].'s'} as $opt)
+                                  {{$opt[$header['show']]}} ,
+                                @endforeach
+                                
 
 
                                 @endif
                                 <!-- !RELACIONES -->
-
 
                                 <!-- CAMPOS -->
                                 @else
