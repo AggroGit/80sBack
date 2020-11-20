@@ -14,6 +14,13 @@
         <link href="{{asset('dashboard/css/styles.css')}}" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
+        <!-- MULTISELECT -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
         <!-- Scripts -->
         @if(!isset($noTypeScript))
           <script src="{{ asset('js/app.js') }}" defer></script>
@@ -22,7 +29,7 @@
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="{{url('admin')}}">Merco</a>
+            <a class="navbar-brand" href="{{url('admin')}}">{{env('APP_NAME')}}</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <!-- <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -52,33 +59,22 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Menu</div>
-                            <a class="nav-link" href="{{url('/admin/category')}}">
+                            <a class="nav-link" href="{{url('/admin/section')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tag"></i></div>
                                 Categorías
                             </a>
-                            <a class="nav-link" href="{{url('admin/association')}}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-city"></i></div>
-                                Asociaciones
-                            </a>
+
                             <a class="nav-link" href="{{url('admin/user')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                                 Usuarios
-                            </a>
-                            <a class="nav-link" href="{{url('admin/business')}}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-building"></i></div>
-                                Negocios
                             </a>
                             <a class="nav-link" href="{{url('admin/product')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-box"></i></div>
                                 Productos
                             </a>
-                            <a class="nav-link" href="{{url('admin/news')}}">
+                            <a class="nav-link" href="{{url('admin/purchase')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-paperclip"></i></div>
-                                Noticias
-                            </a>
-                            <a class="nav-link" href="{{url('admin/chat')}}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-envelope"></i></div>
-                                Chats
+                                Pedidos
                             </a>
 
 

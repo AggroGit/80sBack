@@ -321,6 +321,7 @@ class HomeController extends Controller
       if ($missings = $this->hasError($request->all(),'validation.reserve')) {
         return $this->incorrect(0,$missings);
       }
+      return $this->correct();
     }
 
     // listamos los descuentos disponibles

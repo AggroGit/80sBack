@@ -91,6 +91,7 @@ class CreateProduct extends Migration
                 ->references('id')
                 ->on('business')
                 ->onDelete('cascade')
+                ->default(1)
                 ->onUpdate('cascade');
           $table->timestamps();
         });

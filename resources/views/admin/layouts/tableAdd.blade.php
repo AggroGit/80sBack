@@ -16,31 +16,50 @@
                 <input type="hidden" name="id" value="{{$tabletate['data']['id']?? false}}">
                   <div class="form-row">
                     @foreach($tabletate['headers'] as $key => $header)
-
                       <div class="col-md-6">
                           <div class="form-group">
+                            <!-- SI ES UN CAMPO DE TEXTO  -->
                             @if(!is_array($header)?? false)
                               @if(Schema::hasColumn($model->getTable(), $header))
                             <label class="small mb-1" for="{{$key}}">{{$key}}</label>
                                 <input class="form-control py-4" id="inputLastName" type="text" value="{{$tabletate['data'][$header]?? ''}}" name="{{$header}}" placeholder="{{$key}}" />
                               @endif
                             @else
+                            <!-- Si no es un campo de texto -->
                             <label class="small mb-1" for="{{$key}}">{{$key}}</label>
-                              <select class="form-control" name="{{$header['model_name'].'_id'}}" id="sel1">
-                                  <option></option>
-                                  @foreach($header['select'] as $select)
-                                    <option
-                                    @if ($tabletate['data']?? false and $tabletate['data'][$header['model_name'].'_id']==$select['id'])
-                                      selected
-                                    @endif
-                                     value="{{$select['id']}}">{{$select[$header['show']]}}
-                                   </option>
-                                  @endforeach
-                              </select>
+                            <!-- MULTISELECT -->
+                            @if($header['multiple']?? false)
+                            <select class=" form-control multiselect selectpicker" name="{{$header['model_name']}}[]" multiple data-live-search="true">
+                              @foreach($header['select'] as $select)
+                                <option
+                                @if ($model->{$header['model_name'].'s'}->find($select->id))
+                                  selected
+                                @endif
+                                 value="{{$select['id']}}">{{$select[$header['show']]}}
+                               </option>
+                              @endforeach
+                            </select>
+                            @else
+                            <!-- SELECT UNICO -->
+                            <select class="form-control" name="{{$header['model_name'].'_id'}}" id="sel1">
+                                <option></option>
+                                @foreach($header['select'] as $select)
+                                  <option
+                                  @if ($tabletate['data']?? false and $tabletate['data'][$header['model_name'].'_id']==$select['id'])
+                                    selected
+                                  @endif
+                                   value="{{$select['id']}}">{{$select[$header['show']]}}
+                                 </option>
+                                @endforeach
+                            </select>
+                            @endif
+
+
                             @endif
                           </div>
                       </div>
                     @endforeach
+
 
                     @if($tabletate['options']['image']?? false)
                       <div class="col-md-6">

@@ -201,31 +201,25 @@ class Product extends Model
     }
 
 
-    public  static function tabletate($data) {
+    public  static function tabletate($data = null) {
       return [
         'headers' => [
-          'Identificador' => 'id',
           'Nombre' =>  'name',
-          'Editado el'  => 'updated_at',
 
-          'Categoria' => [
-            'model_name' => 'category',
-            'select'     => Category::all(), // data al seleccionar en crear
+          'Categoría' => [
+            'model_name' => 'section',
+            'select'     => Section::all(), // data al seleccionar en crear
             'show'       => 'name',
-            'url'        => "admin/category/edit"
-          ],
-          'Negocio' => [
-            'model_name' => 'business',
-            'select'     => Business::all(), // data al seleccionar en crear
-            'show'       => 'name',
-            'url'        => "admin/business/edit"
+            'url'        => "admin/section/edit"
           ],
         ],
         'data'  =>  $data,
         'options' => [
           'edit'    => true,
+          'add'     => true,
           'remove'  => true,
-          'image'   => true
+          'image'   => true,
+          'images'  => true,
         ],
         'singular' => 'product',
         'name'  => 'Productos',

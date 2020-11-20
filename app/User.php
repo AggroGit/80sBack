@@ -359,11 +359,6 @@ class User extends Authenticatable
           'identificador' =>  'id',
           'correo'  => 'email',
           'Nombre' =>  'name',
-          'Associación' => [
-            'model_name' => 'Association',
-            'select'     => Association::all(), // data al seleccionar en crear
-            'show'       => 'name',
-          ],
         ],
         'data'  =>  $data,
         'options' => [

@@ -44,7 +44,7 @@ class AdminController extends Controller
 
     public function editModelExists($model,$id)
     {
-      $model = $this->getModel($model);
+      $model = $this->getModel($model)->find($id);
 
       if($cat = $model::find($id)) {
         $tabletate = $model::tabletate($cat);
@@ -60,7 +60,7 @@ class AdminController extends Controller
     public function addDataModel($modelName, Request $request)
     {
       $model = $this->getModel($modelName);
-      if($request->id !== false and $model::find($request->id))  {
+      if($request->id !== false and $request->id !== null and $model::find($request->id))  {
         $model = $model::find($request->id);
       }
       //
@@ -83,6 +83,14 @@ class AdminController extends Controller
         if($key !== '_token') {
           if (Schema::hasColumn($model->getTable(), $key))
           $model[$key] = $value;
+          else {
+              $model->save();
+              
+              // para un multiselect
+              $a = $model->{$key.'s'}()->sync($value);
+          }
+
+
         }
 
       }

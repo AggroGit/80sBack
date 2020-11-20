@@ -53,22 +53,36 @@
                               <img src="{{$data['image']['sizes']['VerySmall']?? $data['images'][0]['sizes']['VerySmall']?? ''}}" alt="">
                             </td>
                           @endif
-
+                          <!-- CAMPOS -->
                           @foreach($tabletate['headers'] as $keyOption => $header)
                             <td>
+                              <!-- RELACIONES A 1-->
                               @if(isset($header['model_name']))
-                                @if($header['url']?? false)
-                                  <a href="{{url($header['url'])}}/{{$data[$header['model_name']]['id']?? ""}}">
+                                @if($header['multiple']?? false)
+                                  @if($header['url']?? false)
+                                    <a href="{{url($header['url'])}}/{{$data[$header['model_name']]['id']?? ""}}">
+                                      {{$data[$header['model_name']][$header['show']]?? ""}}
+                                    </a>
+                                  @else
                                     {{$data[$header['model_name']][$header['show']]?? ""}}
-                                  </a>
+                                  @endif
                                 @else
-                                  {{$data[$header['model_name']][$header['show']]?? ""}}
+                                <!-- RELACIONES A MUCHOS-->
+                                  {{$data->{'sections'}}}
+
+
                                 @endif
-                              @else
-                                {{$data[$header]}}
-                              @endif
+                                <!-- !RELACIONES -->
+
+
+                                <!-- CAMPOS -->
+                                @else
+                                  {{$data[$header]}}
+                                @endif
+
                             </td>
                           @endforeach
+                          <!-- OPCIONES -->
                           @if($tabletate['options']['edit']?? false or $tabletate['options']['remove']?? false)
                           <td>
                             @if($tabletate['options']['edit']?? false)

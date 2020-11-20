@@ -1,5 +1,5 @@
 :root {
-  --merco: #48a999;
+  --merco: black;
 
 }
 
@@ -62,4 +62,10 @@ button {
 }
 .infoCard {
   background: var(--merco) !important;
+}
+.multiselect {
+  color: white !important;
+}
+.filter-option-inner-inner {
+  color: #ffffff !important;
 }
