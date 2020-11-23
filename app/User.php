@@ -127,18 +127,18 @@ class User extends Authenticatable
     // the entire shoppingCart
     public function completeShoppingCart()
     {
-      $no_discount = round(auth()->user()->shoppingCart->sum('price'),2);
+      $discounted = round(auth()->user()->shoppingCart->sum('price'),2);
       if($this->discount and $this->discount->validateDicount()) {
         $d = $this->discount;
         $porcentaje = 100 - $d->percentage_dicount;
-        $no_discount = round(($porcentaje/100)*$no_discount,2);
+        $discounted = round(($porcentaje/100)*$discounted,2);
       }
       return [
         "orders"                =>  auth()->user()->shoppingCart,
-        "totalPrice"            =>  round(auth()->user()->shoppingCart->sum('price'),2),
+        "totalPrice"            =>  $discounted,
         "number"                =>  auth()->user()->shoppingCart->count(),
         "num_business"          =>  auth()->user()->shoppingCart->groupBy('product.business_id')->count(),
-        "total_no_discounts"    =>  $no_discount,
+        "total_no_discounts"    =>  round(auth()->user()->shoppingCart->sum('price'),2),
         "url"                   =>  $this->generateUrlRoute(auth()->user()->shoppingCart()->get())
       ];
     }
