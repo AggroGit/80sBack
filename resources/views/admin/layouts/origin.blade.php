@@ -76,6 +76,10 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-paperclip"></i></div>
                                 Pedidos
                             </a>
+                            <a class="nav-link" href="{{url('admin/allergy')}}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-paperclip"></i></div>
+                                Alergias
+                            </a>
 
 
                         </div>

@@ -15,9 +15,9 @@ class Section extends Model
       return $this->belongsToMany('App\Product','product_section','section_id','product_id')->where('hidden',false);
     }
 
-    public function getProductsCountAttribute($value='')
+    public function getProductsCountAttribute()
     {
-      // code...
+      return $this->products->count();
     }
 
     public  static function tabletate($data=null) {

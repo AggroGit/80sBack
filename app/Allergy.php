@@ -10,10 +10,29 @@ class Allergy extends Model
     protected $table = "allergies";
     protected $with = "image";
 
-    // the image of the message
     public function image()
     {
       return $this->belongsTo('App\Image');
+    }
+
+    public  static function tabletate($data=null) {
+      return [
+        'headers' => [
+          'Nombre'         =>  'name',
+        ],
+        'options' => [
+          'edit'    => true,
+          'remove'  => true,
+          'add'     => true,
+          'image'   => true
+        ],
+        'data'  =>  $data,
+        'singular' => 'allergy',
+        'name'  => 'Alergias'
+
+      ];
+
+
     }
 
 }

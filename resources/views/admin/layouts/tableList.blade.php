@@ -73,7 +73,7 @@
                                 @foreach($data->{$header['model_name'].'s'} as $opt)
                                   {{$opt[$header['show']]}} ,
                                 @endforeach
-                                
+
 
 
                                 @endif

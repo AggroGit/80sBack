@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Malhal\Geographical\Geographical;
 use App\Category;
 use App\Section;
+use App\Allergy;
 use App\Image;
 use App\Sizes;
 
@@ -18,7 +19,7 @@ class Product extends Model
     const LATITUDE  = 'lat';
     const LONGITUDE = 'long';
 
-    protected $with = ["images","sizes","category","sections","allergies"];
+    protected $with = ["images","sizes","category","sections","allergys"];
 
     protected $appends = ["business_name"];
 
@@ -74,7 +75,7 @@ class Product extends Model
     }
 
     // alergias que tiene el producto
-    public function allergies()
+    public function allergys()
     {
       return $this->belongsToMany('App\Allergy','product_allergy', 'product_id', 'allergy_id');
     }
@@ -210,6 +211,13 @@ class Product extends Model
           'Categoría' => [
             'model_name' => 'section',
             'select'     => Section::all(), // data al seleccionar en crear
+            'show'       => 'name',
+            'multiple'   => true,
+            'url'        => "admin/section/edit"
+          ],
+          'Alergenos' => [
+            'model_name' => 'allergy',
+            'select'     => Allergy::all(), // data al seleccionar en crear
             'show'       => 'name',
             'multiple'   => true,
             'url'        => "admin/section/edit"

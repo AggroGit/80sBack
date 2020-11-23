@@ -63,6 +63,29 @@ class AdminController extends Controller
       if($request->id !== false and $request->id !== null and $model::find($request->id))  {
         $model = $model::find($request->id);
       }
+      // campos
+      foreach ($request->all() as $key => $value) {
+        if($key !== '_token') {
+          if (Schema::hasColumn($model->getTable(), $key)) {
+            // excepciones
+            if($key == "price") {
+              $value = str_replace(',','.',$value);
+            }
+            $model[$key] = $value;
+
+          }
+
+          else {
+              $model->save();
+              // para un multiselect
+              if($key !== "image")
+              $a = $model->{$key.'s'}()->sync($value);
+          }
+
+
+        }
+
+      }
       //
       if($request->has('image')) {
         if (Schema::hasColumn($model->getTable(), 'image_id')) {
@@ -79,21 +102,7 @@ class AdminController extends Controller
         }
 
       }
-      foreach ($request->all() as $key => $value) {
-        if($key !== '_token') {
-          if (Schema::hasColumn($model->getTable(), $key))
-          $model[$key] = $value;
-          else {
-              $model->save();
 
-              // para un multiselect
-              $a = $model->{$key.'s'}()->sync($value);
-          }
-
-
-        }
-
-      }
 
       $model->save();
       return redirect("admin/$modelName");
