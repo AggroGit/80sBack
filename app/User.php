@@ -61,7 +61,6 @@ class User extends Authenticatable
     {
       return $this->belongsToMany('App\Chat','chats_users')
                   ->where([
-                    // ['blocked',false],
                     ['hidden',false]
                   ])->orderBy('updated_at','desc');
     }
@@ -128,12 +127,19 @@ class User extends Authenticatable
     // the entire shoppingCart
     public function completeShoppingCart()
     {
+      $no_discount = round(auth()->user()->shoppingCart->sum('price'),2);
+      if($this->discount and $this->discount->validateDicount()) {
+        $d = $this->discount;
+        $porcentaje = 100 - $d->percentage_dicount;
+        $no_discount = round(($porcentaje/100)*$no_discount,2);
+      }
       return [
-        "orders"        =>  auth()->user()->shoppingCart,
-        "totalPrice"    =>  round(auth()->user()->shoppingCart->sum('price'),2),
-        "number"        =>  auth()->user()->shoppingCart->count(),
-        "num_business"  =>  auth()->user()->shoppingCart->groupBy('product.business_id')->count(),
-        "url"           =>  $this->generateUrlRoute(auth()->user()->shoppingCart()->get())
+        "orders"                =>  auth()->user()->shoppingCart,
+        "totalPrice"            =>  round(auth()->user()->shoppingCart->sum('price'),2),
+        "number"                =>  auth()->user()->shoppingCart->count(),
+        "num_business"          =>  auth()->user()->shoppingCart->groupBy('product.business_id')->count(),
+        "total_no_discounts"    =>  $no_discount,
+        "url"                   =>  $this->generateUrlRoute(auth()->user()->shoppingCart()->get())
       ];
     }
 

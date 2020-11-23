@@ -52,6 +52,33 @@ class Purchase extends Model
        return $this->hasMany('App\PayOut');
     }
 
+    // payouts  of the purchase
+    public function getNumProductsAttribute()
+    {
+       return $this->orders()->count();
+    }
+
+    public function getEstadoPedidoAttribute()
+    {
+      $retorno = "desconocido";
+      switch ($this->status) {
+        case 'pending':
+          $retorno = "Pendiente";
+          break;
+        case 'coming':
+          $retorno = "De camino";
+          break;
+        case 'finished':
+          $retorno = "Finalizado";
+
+        default:
+          $retorno = "Desconocido";
+          // code...
+          break;
+      }
+      return $retorno;
+    }
+
 
     // when the order is created
     public function mails()
@@ -154,6 +181,16 @@ class Purchase extends Model
 
     }
 
+    public function getTotalPurchaseAttribute()
+    {
+      return $this->total_price - $this->stripe_commisions;
+    }
+
+    public function getDirectionClientAttribute()
+    {
+      return $this->user->direction;
+    }
+
     public function sendChat()
     {
       // cogemos las tiendas agrupadas por las ordenes y enviamos un mensaje al chat de que ha hecho un pedido
@@ -227,6 +264,36 @@ class Purchase extends Model
       $this->completed = true;
       $this->status = "finished";
       $this->save();
+
+    }
+
+
+    public  static function tabletate($data = null) {
+      return [
+        'headers' => [
+          'Estado'  => 'EstadoPedido',
+          'Cobrado'  => 'total_price',
+          'Comisión Stripe' => 'stripe_commisions',
+          'Total Resultante'   => 'totalpurchase',
+          'Num de Productos' => 'NumProducts',
+          'Dirección' => 'DirectionClient',
+          'Usuario' => [
+            'model_name' => 'user',
+            'select'     => User::all(), // data al seleccionar en crear
+            'show'       => 'name',
+            'multiple'   => false,
+            'url'        => "admin/user/edit"
+          ],
+
+        ],
+        'data'  =>  $data,
+        'options' => [
+          'edit'    => true,
+        ],
+        'singular' => 'purchase',
+        'name'  => 'Pedidos',
+
+      ];
 
     }
 

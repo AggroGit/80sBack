@@ -17,6 +17,12 @@ use App\Navy\Enterprise;
 // rutas de auth de laravel
 Auth::routes();
 
+// entregar en 80s
+Route::any('/prof/purchase/{purchase_id}/deliver','HomeController@deliver');
+// ver pedido 80s
+Route::any('/admin/purchase/edit/{purchase_id}', 'HomeController@purchaseView');
+
+
 Enterprise::admin();
 Enterprise::staPerpetuaAdmin();
 

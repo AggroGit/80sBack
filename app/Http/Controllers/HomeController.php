@@ -7,6 +7,7 @@ use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Http\Request;
 use App\Events\StripeEvent;
 use App\Events\MessageEvent;
+use App\Purchase;
 use App\Discount;
 use App\Category;
 use App\Business;
@@ -345,6 +346,37 @@ class HomeController extends Controller
       auth()->user()->save();
       return $this->correct($discount);
 
+    }
+
+    public function deliver($purchase_id)
+    {
+      if(auth()->user()->type !== "admin") {
+        return redirect('');
+      }
+      //
+      if(!$purchase = Purchase::find($purchase_id)){
+        return redirect('');
+      }
+      //
+      $purchase->completed = true;
+      $purchase->status = "delivered";
+      $purchase->orders()->update([
+        "status" => "delivered"
+      ]);
+      $purchase->save();
+      return redirect('/admin');
+
+    }
+
+    public function purchaseView($purchase_id)
+    {
+      if(auth()->user()->type !== "admin") {
+        return redirect('');
+      }
+      if(!$purchase = Purchase::find($purchase_id)){
+        return redirect('');
+      }
+      return view('admin.layouts.addPurchase')->with('purchase',$purchase);
     }
 
 
