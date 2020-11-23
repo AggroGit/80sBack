@@ -21,7 +21,7 @@ class Purchase extends Model
     //
     //
     protected $fillable = [
-      'user_id', 'total_price', 'stripe_payment_id', "birthday"
+      'user_id', 'total_price', 'stripe_payment_id', "birthday",'discount_id'
     ];
 
     protected $casts = [
@@ -46,6 +46,12 @@ class Purchase extends Model
       return $this->belongsTo('App\User');
     }
 
+    //
+    public function discount()
+    {
+      return $this->belongsTo('App\Discount');
+    }
+
     // payouts  of the purchase
     public function payOuts()
     {
@@ -68,8 +74,9 @@ class Purchase extends Model
         case 'coming':
           $retorno = "De camino";
           break;
-        case 'finished':
+        case 'delivered':
           $retorno = "Finalizado";
+          break;
 
         default:
           $retorno = "Desconocido";
@@ -272,10 +279,10 @@ class Purchase extends Model
       return [
         'headers' => [
           'Estado'  => 'EstadoPedido',
+          'Creado el'  => 'created_at',
           'Cobrado'  => 'total_price',
           'Comisión Stripe' => 'stripe_commisions',
           'Total Resultante'   => 'totalpurchase',
-          'Num de Productos' => 'NumProducts',
           'Dirección' => 'DirectionClient',
           'Usuario' => [
             'model_name' => 'user',

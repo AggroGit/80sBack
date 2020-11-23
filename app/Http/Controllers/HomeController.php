@@ -7,6 +7,8 @@ use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Http\Request;
 use App\Events\StripeEvent;
 use App\Events\MessageEvent;
+use App\Mail\BasicMail;
+use App\Jobs\sendMail;
 use App\Purchase;
 use App\Discount;
 use App\Category;
@@ -322,6 +324,14 @@ class HomeController extends Controller
       if ($missings = $this->hasError($request->all(),'validation.reserve')) {
         return $this->incorrect(0,$missings);
       }
+      $data = [
+        "title"         => "Confirmación de reserva",
+        "logoInTitle"   => true,
+        "text"          => "Se ha solicitado una reserva para 80s el $request->date a las $request->time",
+      ];
+      $business = Business::find(1);
+      sendMail::dispatch(new BasicMail($data),$business->email);
+      sendMail::dispatch(new BasicMail($data),auth()->user()->email);
       return $this->correct();
     }
 
@@ -364,7 +374,7 @@ class HomeController extends Controller
         "status" => "delivered"
       ]);
       $purchase->save();
-      return redirect('/admin');
+      return redirect('/admin/purchase/edit/'.$purchase_id);
 
     }
 

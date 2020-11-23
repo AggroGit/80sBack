@@ -69,7 +69,7 @@
                                 Usuarios
                             </a>
                             <a class="nav-link" href="{{url('admin/product')}}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-box"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-hamburger"></i></div>
                                 Productos
                             </a>
                             <a class="nav-link" href="{{url('admin/purchase')}}">
@@ -77,7 +77,7 @@
                                 Pedidos
                             </a>
                             <a class="nav-link" href="{{url('admin/allergy')}}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-paperclip"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-box"></i></div>
                                 Alergias
                             </a>
 
