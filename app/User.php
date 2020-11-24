@@ -260,7 +260,7 @@ class User extends Authenticatable
         "total_price"         => $price,
         "stripe_payment_id"   => $charge_id,
         "birthday"            => $cumple, // si se ha aplicado cumpleaños
-        "discount_id"         => auth()->user()->discount->id // si se ha aplicado descuento
+        "discount_id"         => auth()->user()->discount->id?? null // si se ha aplicado descuento
       ]);
       // save the purchase
       $purchase->save();
