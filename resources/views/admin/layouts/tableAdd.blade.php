@@ -21,8 +21,13 @@
                             <!-- SI ES UN CAMPO DE TEXTO  -->
                             @if(!is_array($header)?? false)
                               @if(Schema::hasColumn($model->getTable(), $header))
-                            <label class="small mb-1" for="{{$key}}">{{$key}}</label>
+                                @if($header !== "expires_at")
+                                <label class="small mb-1" for="{{$key}}">{{$key}}</label>
                                 <input class="form-control py-4" id="inputLastName" type="text" value="{{$tabletate['data'][$header]?? ''}}" name="{{$header}}" placeholder="{{$key}}" />
+                                @else
+                                <label class="small mb-1" for="{{$key}}">{{$key}}</label>
+                                <input class="form-control py-4" id="inputLastName" type="date" value="{{$tabletate['data'][$header]?? ''}}" name="{{$header}}" placeholder="{{$key}}" />
+                                @endif
                               @endif
                             @else
                             <!-- Si no es un campo de texto -->

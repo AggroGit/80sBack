@@ -80,6 +80,10 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-box"></i></div>
                                 Alergias
                             </a>
+                            <a class="nav-link" href="{{url('admin/discount')}}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tag"></i></div>
+                                Descuentos
+                            </a>
 
 
                         </div>

@@ -54,6 +54,28 @@ class Discount extends Model
     //
     // }
 
+    public  static function tabletate($data = null) {
+      return [
+        'headers' => [
+          'Titulo' =>  'title',
+          'Subtitulo'  => 'subtitle',
+          'Válido hasta'  => 'expires_at',
+          '% de descuento'  => 'percentage_dicount',
+        ],
+
+        'data'  =>  $data,
+        'options' => [
+          'add'     => true,
+          'remove'  => true,
+
+        ],
+        'singular' => 'discount',
+        'name'  => 'Descuentos',
+
+      ];
+
+    }
+
 
 
 }
