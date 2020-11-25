@@ -21,4 +21,24 @@ class Schedule extends Model
     {
       return Carbon::parse($value)->format('H:i');
     }
+
+    public  static function tabletate($data=null) {
+      return [
+        'headers' => [
+          'Día (l,m,x,j,v,s,d)'         =>  'day',
+          'Desde las'         =>  'open_from',
+          'Hasta las'         =>  'open_to',
+        ],
+        'data'  =>  $data,
+        'options' => [
+          'edit'    => true,
+          'remove'  => true,
+          'add'     => true,
+
+        ],
+        'singular' => 'schedule',
+        'name'  => 'Horario'
+      ];
+
+    }
 }

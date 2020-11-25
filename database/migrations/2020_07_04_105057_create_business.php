@@ -33,7 +33,7 @@ class CreateBusiness extends Migration
                   ->onDelete('cascade')
                   ->onUpdate('cascade')
                   ->nullable();
-          
+
             $table->timestamps();
         });
         // horario de la tienda
@@ -47,7 +47,8 @@ class CreateBusiness extends Migration
                   ->references('id')
                   ->on('business')
                   ->onDelete('cascade')
-                  ->onUpdate('cascade');
+                  ->onUpdate('cascade')
+                  ->default(1);
             $table->timestamps();
         });
         // imagenes de la tienda, puede haber más de una

@@ -84,6 +84,10 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tag"></i></div>
                                 Descuentos
                             </a>
+                            <a class="nav-link" href="{{url('admin/schedule')}}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-clock"></i></div>
+                                Horarios
+                            </a>
 
 
                         </div>
