@@ -396,6 +396,7 @@ class User extends Authenticatable
           'identificador' =>  'id',
           'correo'  => 'email',
           'Nombre' =>  'name',
+          'Teléfono'  => 'phone'
         ],
         'data'  =>  $data,
         'options' => [
