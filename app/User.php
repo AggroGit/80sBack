@@ -79,7 +79,7 @@ class User extends Authenticatable
 
     public function purchases()
     {
-      return $this->hasMany('App\Purchase');
+      return $this->hasMany('App\Purchase')->orderBy('created_at','DESC');
     }
 
     // the association of the user

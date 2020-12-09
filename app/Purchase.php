@@ -280,7 +280,6 @@ class Purchase extends Model
         'headers' => [
           'Creado el'  => 'created_at',
           'Estado'  => 'EstadoPedido',
-          
           'Cobrado'  => 'total_price',
           'Comisión Stripe' => 'stripe_commisions',
           'Total Resultante'   => 'totalpurchase',
