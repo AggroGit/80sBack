@@ -278,7 +278,7 @@ class Business extends Model
         'options' => [
           'edit'    => true,
           'remove'  => false,
-          'image'   => false,
+          'image'   => true,
         ],
         'singular' => 'business',
         'name'  => 'Negocios',
