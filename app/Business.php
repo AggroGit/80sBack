@@ -269,7 +269,8 @@ class Business extends Model
           'Pedidos'     => 'numPedidos',
           'Url' => 'link',
           'lat' => 'latitude',
-          'long' => 'longitude'
+          'long' => 'longitude',
+          '% de Descuento décima compra' =>  'discount_on_ten'
         ],
 
         'data'  =>  $data,
