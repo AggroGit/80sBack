@@ -20,6 +20,12 @@
                           <strong>Pedido numero</strong>: 0000{{$purchase->id}}
                         </div>
                         <div class="col-md-6">
+                          <strong>Descuento de cumpleaños</strong>: @if($purchase->birthday) Sí @else No @endif
+                        </div>
+                        <div class="col-md-6">
+                          <strong>Descuento de décima compra</strong>: @if($purchase->10_buys_discount) Sí @else No @endif
+                        </div>
+                        <div class="col-md-6">
                           <strong>Realizado el</strong>: {{$purchase->created_at}}
                         </div>
                         <div class="col-md-6">
