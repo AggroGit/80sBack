@@ -327,7 +327,7 @@ class HomeController extends Controller
       $data = [
         "title"         => "Confirmación de reserva",
         "logoInTitle"   => true,
-        "text"          => "Se ha solicitado una reserva para 80s el $request->date a las $request->time",
+        "text"          => "Se ha solicitado una reserva para vuitantas el $request->date a las $request->time",
       ];
       $business = Business::find(1);
       sendMail::dispatch(new BasicMail($data),$business->email);

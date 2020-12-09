@@ -167,7 +167,7 @@
 
                                 <tr>
                                     <td align="center" height="70" style="height:70px;">
-                                        <a href="" style="display: block; border-style: none !important; border: 0 !important;"><img width="100" border="0" style="display: block; width: 100px;" src="{{$logo?? 'https://merco.app/logos/merco.png'}}" alt="" /></a>
+                                        <a href="" style="display: block; border-style: none !important; border: 0 !important;"><img width="100" border="0" style="display: block; width: 100px;" src="{{$logo?? 'https://restaurante80.merco.app/logos/merco.png'}}" alt="" /></a>
                                     </td>
                                 </tr>
                             </table>
@@ -225,7 +225,7 @@
                                 <tr>
                                      <!-- logo -->
                                      <td align="left">
-                                        <a href="" style="display: block; border-style: none !important; border: 0 !important;"><img width="80" border="0" style="display: block; width: 80px;" src="{{$logo?? 'https://merco.app/logos/merco.png'}}" alt="" /></a>
+                                        <a href="" style="display: block; border-style: none !important; border: 0 !important;"><img width="80" border="0" style="display: block; width: 80px;" src="{{$logo?? 'https://restaurante80.merco.app/logos/merco.png'}}" alt="" /></a>
                                     </td>
                                 </tr>
 
