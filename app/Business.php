@@ -271,6 +271,7 @@ class Business extends Model
             'model_name' => 'user',
             'select'     => User::all(), // data al seleccionar en crear
             'show'       => 'name',
+            'multiple'    => false,
             'url'         => 'admin/user/edit'
           ],
         ],
