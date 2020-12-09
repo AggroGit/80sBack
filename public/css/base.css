@@ -74,5 +74,5 @@ button {
   display: flex !important;
 }
 .remove {
-  background: red;
+  background: red !important;
 }
