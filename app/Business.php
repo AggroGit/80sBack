@@ -267,7 +267,12 @@ class Business extends Model
           'Productos' => 'numProducts',
           'Descripción' => 'description',
           'Pedidos'     => 'numPedidos',
-          
+          'Url' => 'link',
+          'lat' => 'latitude',
+          'long' => 'longitude'
+
+
+
         ],
         'data'  =>  $data,
         'options' => [
