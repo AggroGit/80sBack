@@ -108,6 +108,13 @@
                                   buttonClass="btn"
                                   >
                                 </picture-input>
+                                <a href="{{url('/admin/image/remove/'+image->id)}}">
+                                  <button type="submit" class="btn btn-success btn-sm">
+                                    Eliminar imágen
+                                  </button>
+                                </a>
+
+
                               </div>
                               @endforeach
 
