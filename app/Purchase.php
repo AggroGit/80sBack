@@ -278,8 +278,9 @@ class Purchase extends Model
     public  static function tabletate($data = null) {
       return [
         'headers' => [
-          'Estado'  => 'EstadoPedido',
           'Creado el'  => 'created_at',
+          'Estado'  => 'EstadoPedido',
+          
           'Cobrado'  => 'total_price',
           'Comisión Stripe' => 'stripe_commisions',
           'Total Resultante'   => 'totalpurchase',
