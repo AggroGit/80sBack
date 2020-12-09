@@ -71,4 +71,5 @@ button {
 }
 .margin-auto {
   margin: auto;
+  display: flex;
 }
