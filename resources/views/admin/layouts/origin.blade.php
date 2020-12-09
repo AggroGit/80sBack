@@ -88,6 +88,10 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-clock"></i></div>
                                 Horarios
                             </a>
+                            <a class="nav-link" href="{{url('admin/business')}}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-city"></i></div>
+                                Negocio
+                            </a>
 
 
                         </div>
