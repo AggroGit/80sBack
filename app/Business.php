@@ -270,10 +270,8 @@ class Business extends Model
           'Url' => 'link',
           'lat' => 'latitude',
           'long' => 'longitude'
-
-
-
         ],
+
         'data'  =>  $data,
         'options' => [
           'edit'    => true,

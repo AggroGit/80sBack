@@ -39,6 +39,7 @@ class CreateUsersTable extends Migration
                   ->nullable();
             $table->decimal('longitude', 10, 7)->default( 2.169914);
             $table->decimal('latitude', 10, 7)->default(41.386907);
+            $table->integer('num_to_discount')->default(10);
             $table->integer('image_id')
                   ->references('id')
                   ->on('images')
