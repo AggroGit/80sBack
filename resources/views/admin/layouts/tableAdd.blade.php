@@ -101,7 +101,7 @@
                                   margin="16"
                                   accept="image/jpeg,image/png"
                                   size="10"
-                                  prefill="{{$image->sizes->Big}}"
+                                  prefill="{{$image['sizes']['Big']?? ''}}"
                                   buttonClass="btn"
                                   >
                                 </picture-input>
