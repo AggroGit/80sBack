@@ -226,6 +226,7 @@ class User extends Authenticatable
       // }
       $cumple = false;
       $discount = null;
+      $diezCompras = false;
       // recogemos las ordenes y su precio. Hacemos el cargo de Stripe y si todo va bien entonces se añaden en un purchase
       // cogemos las ordenes seleccionadas.
       $orders = $this->shoppingCart()->pluck('id');
@@ -250,6 +251,11 @@ class User extends Authenticatable
         $price = round($price*0.9,2);
         $cumple = true;
       }
+      if($this->restNumToDiscount()) {
+        $porcentaje = (100-Business::find(1)->discount_on_ten)/100;
+        $price = round($price*$porcentaje,2);
+        $diezCompras = true;
+      }
       // ahora ponemos en estado de loading
       $news = $this->shoppingCart()->update(['status' =>'loading']);
       $charge_id = null;
@@ -260,6 +266,7 @@ class User extends Authenticatable
         "total_price"         => $price,
         "stripe_payment_id"   => $charge_id,
         "birthday"            => $cumple, // si se ha aplicado cumpleaños
+        "10_buys_discount"    => $diezCompras,
         "discount_id"         => auth()->user()->discount->id?? null // si se ha aplicado descuento
       ]);
       // save the purchase
@@ -291,6 +298,21 @@ class User extends Authenticatable
       sendMail::dispatch(new BasicMail($data),$this->email);
 
       return true;
+    }
+
+    public function restNumToDiscount()
+    {
+      if(auth()->user()->num_to_discount < 1) {
+        auth()->user()->num_to_discount = 10;
+        auth()->user()->save();
+        return true;
+
+      } else {
+        auth()->user()->num_to_discount = auth()->user()->num_to_discount-1;
+        auth()->user()->save();
+        return false;
+      }
+
     }
 
     public function openChatToBusinessFromPurchase($purchase_id)
