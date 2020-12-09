@@ -124,7 +124,10 @@
                                   margin="16"
                                   accept="image/jpeg,image/png,image/jpg"
                                   size="10"
-                                  prefill="{{$image['sizes']['Big']?? ''}}"
+                                  :customStrings="{
+                                    upload: '<h1>Bummer!</h1>',
+                                    drag: 'Añadir nueva imágen'
+                                  }"
                                   buttonClass="btn"
                                   >
                                 </picture-input>
