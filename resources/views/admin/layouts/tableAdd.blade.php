@@ -88,7 +88,29 @@
                             </div>
                         </div>
                       @else
-                      multipleImages
+                      <div class="col-md-12">
+                          <div class="form-group">
+                            <div class="row">
+                              @foreach($model->images as $image)
+                              <div class="col-md-3">
+                                <picture-input
+                                  name="image"
+                                  ref="image"
+                                  width="200"
+                                  height="200"
+                                  margin="16"
+                                  accept="image/jpeg,image/png"
+                                  size="10"
+                                  prefill="{{$image->sizes->Big}}"
+                                  buttonClass="btn"
+                                  >
+                                </picture-input>
+                              </div>
+                              @endforeach
+
+                            </div>
+                          </div>
+                      </div>
                       @endif
                     @endif
 
