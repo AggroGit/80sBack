@@ -21,7 +21,7 @@ class AdminController extends Controller
       if(!$model) {
         return back();
       }
-      $tabletate = $model::tabletate($model::orderBy('created_at','desc')->get());
+      $tabletate = $model::tabletate($model::orderBy('created_at','DESC')->get());
       //
       return view('admin.layouts.tableList')->with([
         'tabletate' => $tabletate,
