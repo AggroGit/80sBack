@@ -185,7 +185,7 @@
                             @if(!isset($title))
                               Mensaje de  <span>{{env('APP_NAME')}}</span>
                             @else
-                            {{$title}} @if($logoInTitle?? false)<span style="color: {{env('LIGHT_COLOR','#000000')}};">MERCO</span>@endif
+                            {{$title}} @if($logoInTitle?? false)<span style="color: {{env('LIGHT_COLOR','#000000')}};">Vuitantas</span>@endif
                             @endif
                         </div>
                     </td>
