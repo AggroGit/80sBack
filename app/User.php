@@ -302,7 +302,7 @@ class User extends Authenticatable
 
     public function restNumToDiscount()
     {
-      if(auth()->user()->num_to_discount >= 10) {
+      if(auth()->user()->num_to_discount > 9) {
         auth()->user()->num_to_discount = 0;
         auth()->user()->save();
         return true;
