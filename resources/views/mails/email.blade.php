@@ -183,9 +183,9 @@
 
                         <div style="line-height: 35px">
                             @if(!isset($title))
-                              Mensaje de  <span style="color: {{env('LIGHT_COLOR','#48A999')}};">MERCO</span>
+                              Mensaje de  <span>{{env('APP_NAME')}}</span>
                             @else
-                            {{$title}} @if($logoInTitle?? false)<span style="color: {{env('LIGHT_COLOR','#48A999')}};">MERCO</span>@endif
+                            {{$title}} @if($logoInTitle?? false)<span style="color: {{env('LIGHT_COLOR','#000000')}};">MERCO</span>@endif
                             @endif
                         </div>
                     </td>
@@ -296,7 +296,7 @@
     <!-- end section -->
 
     <!-- footer ====== -->
-    <table border="0" width="100%" cellpadding="0" cellspacing="0" bgcolor="{{env('LIGHT_COLOR','#48A999')}}">
+    <table border="0" width="100%" cellpadding="0" cellspacing="0" bgcolor="#ff0000">
 
         <tr>
             <td height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td>
