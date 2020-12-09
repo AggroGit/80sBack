@@ -109,7 +109,7 @@
                                   >
                                 </picture-input>
                                 <a href="{{url('/admin/image/remove/'.$image->id)}}">
-                                  <button type="" class="btn btn-danger margin-auto text-center">
+                                  <button type="" class="btn btn-danger margin-auto text-center btn-sm">
                                     Eliminar imágen
                                   </button>
                                 </a>
