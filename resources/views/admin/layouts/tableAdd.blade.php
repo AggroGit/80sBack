@@ -113,10 +113,22 @@
                                     Eliminar imágen
                                   </button>
                                 </a>
-
-
                               </div>
                               @endforeach
+                              <div class="col-md-3">
+                                <picture-input
+                                  name="image"
+                                  ref="image"
+                                  width="200"
+                                  height="200"
+                                  margin="16"
+                                  accept="image/jpeg,image/png,image/jpg"
+                                  size="10"
+                                  prefill="{{$image['sizes']['Big']?? ''}}"
+                                  buttonClass="btn"
+                                  >
+                                </picture-input>
+                              </div>
 
                             </div>
                           </div>

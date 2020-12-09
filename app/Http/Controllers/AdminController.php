@@ -82,26 +82,25 @@ class AdminController extends Controller
               $a = $model->{$key.'s'}()->sync($value);
           }
 
-
         }
 
       }
       //
-      if($request->has('image')) {
-        if (Schema::hasColumn($model->getTable(), 'image_id')) {
+        if (Schema::hasColumn($model->getTable(), 'image_id') and $request->has('image')) {
           $image = new Image();
           $image->create($request->image,$modelName);
           $model->image_id = $image->id;
         } else {
+          // es multi-image
+
           try {
             $image = new Image();
             $image->create($request->image,$modelName);
             $model->images()->save($image);
           } catch (\Exception $e) {}
-
         }
 
-      }
+
 
 
       $model->save();
