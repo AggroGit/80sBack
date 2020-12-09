@@ -267,13 +267,7 @@ class Business extends Model
           'Productos' => 'numProducts',
           'Descripción' => 'description',
           'Pedidos'     => 'numPedidos',
-          'Propietario' => [
-            'model_name' => 'user',
-            'select'     => User::all(), // data al seleccionar en crear
-            'show'       => 'name',
-            'multiple'    => false,
-            'url'         => 'admin/user/edit'
-          ],
+          
         ],
         'data'  =>  $data,
         'options' => [
