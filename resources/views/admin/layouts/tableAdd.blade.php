@@ -91,6 +91,8 @@
                       <div class="col-md-12">
                           <div class="form-group">
                             <h4>Imágenes</h4>
+                            <br>
+                            <br>
                             <div class="row down-2">
                               @foreach($model->images as $image)
                               <div class="col-md-3">
