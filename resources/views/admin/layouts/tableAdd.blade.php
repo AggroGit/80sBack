@@ -99,7 +99,7 @@
                                   width="200"
                                   height="200"
                                   margin="16"
-                                  accept="image/jpeg,image/png"
+                                  accept="image/jpeg,image/png,image/jpg"
                                   size="10"
                                   prefill="{{$image['sizes']['Big']?? ''}}"
                                   buttonClass="btn"
