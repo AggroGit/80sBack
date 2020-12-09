@@ -73,3 +73,6 @@ button {
   margin: auto;
   display: flex !important;
 }
+.remove {
+  background: red;
+}
