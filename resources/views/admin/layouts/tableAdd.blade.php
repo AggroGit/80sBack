@@ -67,25 +67,29 @@
 
 
                     @if($tabletate['options']['image']?? false)
-                      <div class="col-md-6">
-                          <div class="form-group">
-                            <label class="small mb-1" for="image">Imagen</label>
-                            <picture-input
-                              name="image"
-                              ref="image"
-                              width="200"
-                              height="200"
-                              margin="16"
-                              accept="image/jpeg,image/png"
-                              size="10"
-                              @if($tabletate['data']['image']?? $tabletate['data']['images'][0]?? false)
-                              prefill="{{$tabletate['data']['image']['sizes']['Big']?? $tabletate['data']['images'][0]['sizes']['Big']?? $tabletate['data']['images'][0]?? ''}}"
-                              @endif
-                              buttonClass="btn"
-                              >
-                            </picture-input>
-                          </div>
-                      </div>
+                    @if(Schema::hasColumn($model->getTable(), 'image_id'))
+                        <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="small mb-1" for="image">Imagen</label>
+                              <picture-input
+                                name="image"
+                                ref="image"
+                                width="200"
+                                height="200"
+                                margin="16"
+                                accept="image/jpeg,image/png"
+                                size="10"
+                                @if($tabletate['data']['image']?? $tabletate['data']['images'][0]?? false)
+                                prefill="{{$tabletate['data']['image']['sizes']['Big']?? $tabletate['data']['images'][0]['sizes']['Big']?? $tabletate['data']['images'][0]?? ''}}"
+                                @endif
+                                buttonClass="btn"
+                                >
+                              </picture-input>
+                            </div>
+                        </div>
+                      @else
+                      multipleImages
+                      @endif
                     @endif
 
                   </div>
