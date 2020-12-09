@@ -25,9 +25,9 @@ class Schedule extends Model
     public  static function tabletate($data=null) {
       return [
         'headers' => [
-          'Día (l,m,x,j,v,s,d)'         =>  'day',
-          'Desde las'         =>  'open_from',
-          'Hasta las'         =>  'open_to',
+          'Día (l,m,x,j,v,s,d)'   =>  'day',
+          'Desde las'             =>  'open_from',
+          'Hasta las'             =>  'open_to',
         ],
         'data'  =>  $data,
         'options' => [

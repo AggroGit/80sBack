@@ -260,12 +260,11 @@ class Business extends Model
     public  static function tabletate($data) {
       return [
         'headers' => [
-          'Identificador' => 'id',
           'Número de telefono' => 'phone',
+          'Dirección' => 'direction',
           'Nombre' =>  'name',
+          'Correo' =>  'email',
           'Productos' => 'numProducts',
-          'Creado el' => 'created_at',
-          "Editado el"  => 'updated_at',
           'Descripción' => 'description',
           'Pedidos'     => 'numPedidos',
           'Propietario' => [
@@ -274,17 +273,11 @@ class Business extends Model
             'show'       => 'name',
             'url'         => 'admin/user/edit'
           ],
-          'Categoria' => [
-            'model_name' => 'category',
-            'select'     => Category::all(), // data al seleccionar en crear
-            'show'       => 'name',
-            'url'         => 'admin/category/edit'
-          ],
         ],
         'data'  =>  $data,
         'options' => [
           'edit'    => true,
-          'remove'  => true,
+          'remove'  => false,
           'image'   => true,
         ],
         'singular' => 'business',
