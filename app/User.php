@@ -281,6 +281,15 @@ class User extends Authenticatable
       $purchase->mails();
       // paso de referencia
       $purchase = $purchase->id;
+
+      //
+      $data = [
+        "title"         => "Nuevo Pedido de Vuitantas",
+        "logoInTitle"   => true,
+        "text"          => "Gracias por confiar con nosotros, puedes seguir tu pedido a través de la app",
+      ];
+      sendMail::dispatch(new BasicMail($data),$this->email);
+
       return true;
     }
 
