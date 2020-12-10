@@ -115,7 +115,7 @@ class AdminController extends Controller
 
 
         }
-        dd($request->all());
+        dd($request->{'image_'.$oldImage->id});
 
 
 
