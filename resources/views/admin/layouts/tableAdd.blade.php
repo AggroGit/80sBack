@@ -68,7 +68,7 @@
 
                     @if($tabletate['options']['image']?? false)
                     @if(Schema::hasColumn($model->getTable(), 'image_id'))
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                               <label class="small mb-1" for="image">Imagen</label>
                               <picture-input
@@ -95,7 +95,7 @@
                             <br>
                             <div class="row down-2">
                               @foreach($model->images as $image)
-                              <div class="col-md-3 down-2">
+                              <div class="col-md-4 down-2">
                                 <br>
                                 <br>
                                 <picture-input
