@@ -136,7 +136,10 @@ class AdminController extends Controller
       } else {
         return "ERROR";
       }
-      return redirect("admin/$modelName");
+      if($modelName == "image" ) {
+        return back();
+      }
+      return redirect("admin");
     }
 
     public function dashboard()

@@ -113,11 +113,12 @@
                                   buttonClass="btn"
                                   >
                                 </picture-input>
-                                <a href="{{url('/admin/image/remove/'.$image->id)}}">
-                                  <button type="" class="btn btn-danger margin-auto text-center btn-sm remove">
-                                    Eliminar imágen
-                                  </button>
-                                </a>
+                                <div class="text-center">
+                                  <a class="text-danger text-center" href="{{url('/admin/image/remove/'.$image->id)}}">
+                                      Eliminar imágen
+                                  </a>
+                                </div>
+
                               </div>
                               @endforeach
                               <div class="col-md-3">

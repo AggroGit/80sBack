@@ -248,6 +248,16 @@ class Image extends Model
     return $new;
   }
 
+  public  static function tabletate($data = null) {
+    return [
+      
+      'singular' => 'product',
+      'name'  => 'Productos',
+
+    ];
+
+  }
+
 
 
 

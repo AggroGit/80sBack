@@ -20,16 +20,7 @@ class TestController extends Controller
 
     public function sendPush(Request $request)
     {
-      // auth()->user()->send([
-      //   'title'=>"Buenasssssss",
-      //   'body'=>'Que tal',
-      // ]);
-      $negocios = Business::where('description','negocio')->get();
-      foreach ($negocios as $negocio) {
-        $negocio->description = "¡Hola! Bienvenido a $negocio->name, para cualquier duda tienes el chat. Gracias."
-        // code...
-        $negocio->save();
-      }
+      
     }
 
     public function testMail()
