@@ -78,7 +78,7 @@ class AdminController extends Controller
           else {
               $model->save();
               // para un multiselect
-              if(strpos($key,"image"))
+              if(!strpos($key,"image"))
               $a = $model->{$key.'s'}()->sync($value);
           }
 
