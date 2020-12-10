@@ -132,14 +132,9 @@ class AdminController extends Controller
     {
       $model = $this->getModel($modelName);
       if($model = $model::find($id))  {
-        if($model->image)
-        $model->image->destroyImage();
-        if($model->images) {
-          foreach ($model->images as $image) {
-            $image->destroyImage();
-          }
-        }
         $model->delete();
+      } else {
+        return "ERROR";
       }
       return redirect("admin/$modelName");
     }
