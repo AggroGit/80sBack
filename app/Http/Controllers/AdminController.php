@@ -109,9 +109,12 @@ class AdminController extends Controller
           foreach ($modelImages as $oldImage) {
             // si hay una imagen que coincida con el nombre, entonces se elimina
             if($request->has('image_'.$oldImage->id)) {
+              // creamos la nueva
               $image = new Image();
               $image->create($request->all()['image_'.$oldImage->id]);
               $model->images()->save($image);
+              // borramos la antogua
+              $oldImage->delete();
             }
           }
 
