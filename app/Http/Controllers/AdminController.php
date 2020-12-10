@@ -106,7 +106,7 @@ class AdminController extends Controller
           //cogemos las imagenes del modelo
 
           // les sacamos su id
-          if ($modelImages = $model->images;)
+          if ($modelImages = $model->images)
           foreach ($modelImages as $oldImage) {
             // si hay una imagen que coincida con el nombre, entonces se elimina
             if($request->has('image_'.$oldImage->id)) {
