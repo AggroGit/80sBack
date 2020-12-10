@@ -109,18 +109,18 @@ class AdminController extends Controller
           foreach ($modelImages as $oldImage) {
             // si hay una imagen que coincida con el nombre, entonces se elimina
             if($request->has('image_'.$oldImage->id)) {
-              $oldImage->updateImage($request->{'image_'.$oldImage->id});
+              $oldImage->updateImage($request->all()['image_'.$oldImage->id]);
             }
           }
 
 
         }
-        dd($request->{'image_'.$oldImage->id});
+
 
 
 
       $model->save();
-      // return redirect("admin/$modelName");
+      return redirect("admin/$modelName");
     }
 
     public function deleteDataModel($modelName,$id)
