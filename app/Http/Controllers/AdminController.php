@@ -78,7 +78,7 @@ class AdminController extends Controller
           else {
               $model->save();
               // para un multiselect
-              if($key !== "image")
+              if(strpos($key,"image"))
               $a = $model->{$key.'s'}()->sync($value);
           }
 
@@ -91,13 +91,29 @@ class AdminController extends Controller
           $image->create($request->image,$modelName);
           $model->image_id = $image->id;
         } else {
-          // es multi-image
+          // es multi-image?
+          // debemos mirar primero si hay de nuevas
+          if ($request->has('images'))
+          foreach ($request->images as $newImage) {
+            // code...
+            // try {
+              $image = new Image();
+              $image->create($newImage);
+              $model->images()->save($image);
+            // } catch (\Exception $e) {}
+          }
+          // ahora actualizar las viejas
+          //cogemos las imagenes del modelo
+          $modelImages = $model->images;
+          // les sacamos su id
+          foreach ($modelImages as $oldImage) {
+            // si hay una imagen que coincida con el nombre, entonces se elimina
+            if($request->has('image_'.$oldImage->id)) {
+              $oldImage->updateImage($request->{'image_'.$oldImage->id});
+            }
+          }
 
-          try {
-            $image = new Image();
-            $image->create($request->image,$modelName);
-            $model->images()->save($image);
-          } catch (\Exception $e) {}
+
         }
 
 

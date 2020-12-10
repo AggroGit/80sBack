@@ -95,15 +95,20 @@
                             <br>
                             <div class="row down-2">
                               @foreach($model->images as $image)
-                              <div class="col-md-3">
+                              <div class="col-md-3 down-2">
+                                <br>
+                                <br>
                                 <picture-input
-                                  name="image"
+                                  name="image_{{$image->id}}"
                                   ref="image"
                                   width="200"
                                   height="200"
                                   margin="16"
                                   accept="image/jpeg,image/png,image/jpg"
                                   size="10"
+                                  customStrings="{
+                                    change: 'Cambiar imágen'
+                                  }"
                                   prefill="{{$image['sizes']['Big']?? ''}}"
                                   buttonClass="btn"
                                   >
@@ -116,21 +121,12 @@
                               </div>
                               @endforeach
                               <div class="col-md-3">
-                                <picture-input
-                                  name="image"
-                                  ref="image"
-                                  width="200"
-                                  height="200"
-                                  margin="16"
-                                  accept="image/jpeg,image/png,image/jpg"
-                                  size="10"
-                                  :customStrings="{
-                                    upload: '<h1>Bummer!</h1>',
-                                    drag: 'Añadir nueva imágen'
-                                  }"
-                                  buttonClass="btn"
-                                  >
-                                </picture-input>
+                                <br>
+                                <br>
+
+                                <h4>Añadir Imágenes</h4>
+                                <input type="file" id="files" accept="image/jpeg,image/png,image/jpg" name="images[]" multiple><br><br>
+
                               </div>
 
                             </div>
