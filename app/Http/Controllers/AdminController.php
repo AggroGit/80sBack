@@ -104,8 +104,9 @@ class AdminController extends Controller
           }
           // ahora actualizar las viejas
           //cogemos las imagenes del modelo
-          $modelImages = $model->images;
+
           // les sacamos su id
+          if ($modelImages = $model->images;)
           foreach ($modelImages as $oldImage) {
             // si hay una imagen que coincida con el nombre, entonces se elimina
             if($request->has('image_'.$oldImage->id)) {
