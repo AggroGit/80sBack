@@ -90,9 +90,12 @@
                       @else
                       <div class="col-md-12">
                           <div class="form-group">
+                            @if($model->images->count()>1)
                             <h4>Imágenes</h4>
+
                             <br>
                             <br>
+                            @endif
                             <div class="row down-2">
                               @foreach($model->images as $image)
                               <div class="col-md-4 down-2">
