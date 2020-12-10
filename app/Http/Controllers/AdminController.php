@@ -115,12 +115,12 @@ class AdminController extends Controller
 
 
         }
-
+        dd($request->all());
 
 
 
       $model->save();
-      return redirect("admin/$modelName");
+      // return redirect("admin/$modelName");
     }
 
     public function deleteDataModel($modelName,$id)
