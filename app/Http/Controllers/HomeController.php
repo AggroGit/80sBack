@@ -324,10 +324,11 @@ class HomeController extends Controller
       if ($missings = $this->hasError($request->all(),'validation.reserve')) {
         return $this->incorrect(0,$missings);
       }
+      $user = auth()->user();
       $data = [
         "title"         => "Confirmación de reserva",
         "logoInTitle"   => true,
-        "text"          => "Se ha solicitado una reserva para vuitantas el $request->date a las $request->time",
+        "text"          => "Se ha solicitado una reserva para vuitantas el usuario con nombre $user->name, num telefono $user->phone el $request->date a las $request->time.",
       ];
       $business = Business::find(1);
       sendMail::dispatch(new BasicMail($data),$business->email);

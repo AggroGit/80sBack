@@ -250,7 +250,31 @@ class Image extends Model
 
   public  static function tabletate($data = null) {
     return [
-      
+      'headers' => [
+        'Descripción'  => 'description',
+        'Categoría' => [
+          'model_name' => 'section',
+          'select'     => Section::all(), // data al seleccionar en crear
+          'show'       => 'name',
+          'multiple'   => true,
+          'url'        => "admin/section/edit"
+        ],
+        'Alergenos' => [
+          'model_name' => 'allergy',
+          'select'     => Allergy::all(), // data al seleccionar en crear
+          'show'       => 'name',
+          'multiple'   => true,
+          'url'        => "admin/section/edit"
+        ],
+      ],
+      'data'  =>  $data,
+      'options' => [
+        'edit'    => true,
+        'add'     => true,
+        'remove'  => true,
+        'image'   => true,
+        'images'  => true,
+      ],
       'singular' => 'product',
       'name'  => 'Productos',
 
