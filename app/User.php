@@ -16,6 +16,7 @@ use App\Traits\Notify;
 use App\Jobs\sendMail;
 use App\Association;
 use Carbon\Carbon;
+use App\Business;
 use App\Purchase;
 
 
@@ -295,7 +296,7 @@ class User extends Authenticatable
         "logoInTitle"   => true,
         "text"          => "Gracias por confiar con nosotros, puedes seguir tu pedido a través de la app",
       ];
-      sendMail::dispatch(new BasicMail($data),$this->email);
+      sendMail::dispatch(new BasicMail($data),Business::find(1)->email);
 
       return true;
     }
