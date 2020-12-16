@@ -57,8 +57,8 @@ class Discount extends Model
     public  static function tabletate($data = null) {
       return [
         'headers' => [
-          'Titulo' =>  'title',
-          'Subtitulo'  => 'subtitle',
+          'Título' =>  'title',
+          'Subtítulo'  => 'subtitle',
           'Válido hasta'  => 'expires_at',
           '% de descuento'  => 'percentage_dicount',
         ],

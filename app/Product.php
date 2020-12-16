@@ -215,7 +215,7 @@ class Product extends Model
             'multiple'   => true,
             'url'        => "admin/section/edit"
           ],
-          'Alergenos' => [
+          'Alérgenos' => [
             'model_name' => 'allergy',
             'select'     => Allergy::all(), // data al seleccionar en crear
             'show'       => 'name',

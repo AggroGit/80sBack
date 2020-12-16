@@ -289,12 +289,17 @@ class User extends Authenticatable
       $purchase->mails();
       // paso de referencia
       $purchase = $purchase->id;
-
+      $user = auth()->user();
       //
       $data = [
-        "title"         => "Nuevo Pedido de Vuitantas",
-        "logoInTitle"   => true,
-        "text"          => "Gracias por confiar con nosotros, puedes seguir tu pedido a través de la app",
+        "title"       => "Nuevo Pedido con identificador $purchase->id",
+        "logoInTitle" =>  true,
+        "text"        => "Nuevo pedido de usuario con nombre $user->name a gestionar. El identificador de pedido es $purchase->id",
+        "ticket"      =>  "Resumen del Pedido (para ver descuentos ir )",
+        "option"      => [
+          "text"  => "Abrir pedido",
+          "url" => url('admin/purchase/'.$purchase->id)
+        ]
       ];
       sendMail::dispatch(new BasicMail($data),Business::find(1)->email);
 
@@ -309,7 +314,7 @@ class User extends Authenticatable
         return true;
 
       } else {
-        auth()->user()->num_to_discount = auth()->user()->num_to_discount+1;
+        auth()->user()->num_to_discount = auth()->user()->num_to_discount-1;
         auth()->user()->save();
         return false;
       }
