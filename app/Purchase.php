@@ -21,7 +21,7 @@ class Purchase extends Model
     //
     //
     protected $fillable = [
-      'user_id', 'total_price', 'stripe_payment_id', "birthday",'discount_id','10_buys_discount'
+      'user_id', 'total_price', 'stripe_payment_id', "birthday",'discount_id','10_buys_discount','percentage_dicount'
     ];
 
     protected $casts = [

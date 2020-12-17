@@ -82,6 +82,7 @@ class CreateOrder extends Migration
             $table->string('stripe_payment_id')->nullable(); // el id del pago al cliente
             $table->string('stripe_refound_id')->nullable(); // en caso que se devuelva
             $table->string('status')->default('pending');// pending, coming, delivered
+            $table->integer('percentage_dicount')->nullable();
             $table->integer('payment_tries')->default(0);
             $table->timestamp('nextTry')->nullable();
             $table->double('stripe_commisions', 8, 2)->nullable();
