@@ -259,7 +259,7 @@ return [
 
     'reserve'  => [
       'time'     =>  'required|date_format:H:i',
-      'date'      => 'required|date'.
+      'date'      => 'required|date',
       'num_persons' => 'integer',
     ],
 
