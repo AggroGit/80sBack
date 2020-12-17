@@ -195,7 +195,7 @@ class Product extends Model
 
     public function delete()
     {
-        $this->orders()->delete();
+        // $this->orders()->delete();
         $this->images()->delete();
         $this->sections()->sync([]);
         return parent::delete();
