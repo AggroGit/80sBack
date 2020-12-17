@@ -27,6 +27,7 @@ class Purchase extends Model
     protected $casts = [
         'completed'   => 'boolean',
         'birthday'    => 'boolean',
+        'take_away'   => 'boolean'
     ];
 
     protected $table = 'purchase';
