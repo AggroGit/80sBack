@@ -17,7 +17,7 @@ use App\User;
 
 class Purchase extends Model
 {
-    protected $with = ["orders"];
+    protected $with = ["orders",'discount'];
     //
     //
     protected $fillable = [

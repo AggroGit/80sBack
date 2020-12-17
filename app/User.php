@@ -295,7 +295,7 @@ class User extends Authenticatable
         "title"       => "Nuevo Pedido con identificador $purchase->id",
         "logoInTitle" =>  true,
         "text"        => "Nuevo pedido de usuario con nombre $user->name a gestionar. El identificador de pedido es $purchase->id",
-        "ticket"      =>  "Resumen del Pedido (para ver descuentos ir )",
+        "ticket"      =>  "Resumen del Pedido (para ver descuentos ir al administrador de pedidos)",
         "option"      => [
           "text"  => "Abrir pedido",
           "url" => url('admin/purchase/'.$purchase->id)
