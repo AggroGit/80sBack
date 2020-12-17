@@ -293,16 +293,16 @@ class User extends Authenticatable
       $purchase = $purchase->id;
       $user = auth()->user();
       //
-      $data = [
-        "title"       => "Nuevo Pedido con identificador $purchase->id",
-        "logoInTitle" =>  true,
-        "text"        => "Nuevo pedido de usuario con nombre $user->name a gestionar. El identificador de pedido es $purchase->id",
-        "ticket"      =>  "Resumen del Pedido (para ver descuentos ir al administrador de pedidos)",
-        "option"      => [
-          "text"  => "Abrir pedido",
-          "url" => url('admin/purchase/'.$purchase->id)
-        ]
-      ];
+      // $data = [
+      //   "title"       => "Nuevo Pedido con identificador $purchase->id",
+      //   "logoInTitle" =>  true,
+      //   "text"        => "Nuevo pedido de usuario con nombre $user->name a gestionar. El identificador de pedido es $purchase->id",
+      //   "ticket"      =>  "Resumen del Pedido (para ver descuentos ir al administrador de pedidos)",
+      //   "option"      => [
+      //     "text"  => "Abrir pedido",
+      //     "url" => url('admin/purchase/'.$purchase->id)
+      //   ]
+      // ];
       // sendMail::dispatch(new BasicMail($data),Business::find(1)->email);
 
       return true;
