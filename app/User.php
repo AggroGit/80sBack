@@ -288,7 +288,7 @@ class User extends Authenticatable
       ]);
       auth()->user()->discount_id = null;
       auth()->user()->save();
-      $purchase->mails();
+      // $purchase->mails();
       // paso de referencia
       $purchase = $purchase->id;
       $user = auth()->user();
