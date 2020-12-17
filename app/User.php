@@ -268,6 +268,7 @@ class User extends Authenticatable
         "stripe_payment_id"   => $charge_id,
         "birthday"            => $cumple, // si se ha aplicado cumpleaños
         "10_buys_discount"    => $diezCompras,
+        "take_away"           => $request->take_away?? false,
         "percentage_dicount"  => $discount->percentage_dicount?? null,
         "discount_id"         => auth()->user()->discount->id?? null // si se ha aplicado descuento
       ]);
