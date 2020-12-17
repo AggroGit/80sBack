@@ -171,6 +171,7 @@ return [
     ],
 
     'buy'   =>    [
+      'take_away' => 'boolean',
     ],
 
     'addCreditCard'   => [
@@ -259,8 +260,7 @@ return [
     'reserve'  => [
       'time'     =>  'required|date_format:H:i',
       'date'      => 'required|date'.
-      'take_away' => 'required|boolean',
-      'num_persons' => 'required|integer',
+      'num_persons' => 'integer',
     ],
 
 
