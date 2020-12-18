@@ -293,10 +293,11 @@ class User extends Authenticatable
       $purchase = $purchase->id;
       $user = auth()->user();
       //
+      $llevar = $request->take_away? "para llevar ";
       $data = [
-        "title"       => "Nuevo Pedido con identificador $purchase->id",
+        "title"       => "Nuevo Pedido $llevar con identificador $purchase->id",
         "logoInTitle" =>  true,
-        "text"        => "Nuevo pedido de usuario con nombre $user->name a gestionar. El identificador de pedido es $purchase->id",
+        "text"        => "Nuevo pedido $llevar de usuario con nombre $user->name a gestionar. El identificador de pedido es $purchase->id",
         "ticket"      =>  "Resumen del Pedido (para ver descuentos ir al administrador de pedidos)",
         "option"      => [
           "text"  => "Abrir pedido",

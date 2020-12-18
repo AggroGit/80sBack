@@ -91,41 +91,36 @@ class Purchase extends Model
     // when the order is created
     public function mails()
     {
-      // para el cliente
+      // para el negocio
 
+      $llevar = $this->take_away? "para llevar ";
+      $discount = $this->discount_id == null?
+      "" : ("con un descuento aplicado del ".$this->discount->percentage_dicount.'%');
+      $data = [
+        "title"       => "Nuevo Pedido",
+        "logoInTitle" =>  true,
+        "text"        => "Tienes un pedido nuevo $discount, entra para gestionarlo y ver más detalles",
+        "ticket"      =>  "El Pedido",
+        "option"      => [
+          "text"  => "Ver pedido",
+          "url" => url('admin/purchase/')
+        ]
+      ];
+      sendMail::dispatch(new OrdersMail($this->orders,$this,$data),Business::find(1)->email);
+      // cliente
+      $llevar = $this->take_away? "para llevar ";
+      $discount = $this->discount_id == null?
+      "" : ("con un descuento aplicado del ".$this->discount->percentage_dicount.'%');
       $data = [
         "title"       => "Resumen de tu Pedido",
         "logoInTitle" =>  true,
-        "text"        => "¡Gracias ".auth()->user()->name." por ayudar al comercio local!",
+        "text"        => "Puedes ver más detalles a través de la app",
         "ticket"      =>  "Tu Pedido",
-        "option"      => [
-          "text"  => "Ver ruta",
-          "url" => User::generateUrlRoute($this->orders)
-        ]
       ];
-
       sendMail::dispatch(new OrdersMail($this->orders,$this,$data),$this->user->email);
-      // now for the business
-      $orders = $this->orders->groupBy('business_id');
 
-      foreach ($orders as $key => $order) {
-        $num = $order->count();
-        if($business = Business::find($key)) {
-          $business->user->send([
-            'title' =>  'Nuevo pedido',
-            'body'  =>  "Tienes un nuevo pedido con un total de $num productos por gestionar",
-            "sound"   => "default",
-            "type"    => "purchase"
-          ]);
-          $dataBusiness = [
-            "title"       => "Nuevo Pedido para $business->name",
-            "logoInTitle" =>  false,
-            "text"        => "Hola ".$business->user->name.", tienes un nuevo pedido",
-            "ticket"      =>  "Tu Pedido"
-          ];
-          sendMail::dispatch(new OrdersMail($order,$this,$dataBusiness),$business->user->email);
-        }
-      }
+
+
     }
 
     public function notifyCancel($business)
