@@ -20,7 +20,7 @@
                           <strong>Pedido numero</strong>: 0000{{$purchase->id}}
                         </div>
                         <div class="col-md-6">
-                          <strong>Para llevar: </strong>: {{$purchase->take_away?? "Sí" : "No"}}
+                          <strong>Para llevar: </strong>: {{$purchase->take_away?? "Sí" : "No";}}
                         </div>
                         <div class="col-md-6">
                           <strong>Descuento de cumpleaños</strong>: @if($purchase->birthday) Sí @else No @endif
