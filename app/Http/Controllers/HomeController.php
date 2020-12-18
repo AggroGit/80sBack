@@ -341,6 +341,7 @@ class HomeController extends Controller
       sendMail::dispatch(new BasicMail($data),auth()->user()->email);
       return $this->correct();
     }
+    
 
     // listamos los descuentos disponibles
     public function listDiscounts()
