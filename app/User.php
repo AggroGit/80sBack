@@ -297,11 +297,11 @@ class User extends Authenticatable
       $data = [
         "title"       => "Nuevo Pedido $llevar con identificador $purchase",
         "logoInTitle" =>  true,
-        "text"        => "Nuevo pedido $llevar de usuario con nombre $user->name a gestionar. El identificador de pedido es $purchase->id",
+        "text"        => "Nuevo pedido $llevar de usuario con nombre $user->name a gestionar. El identificador de pedido es $purchase",
         "ticket"      =>  "Resumen del Pedido (para ver descuentos ir al administrador de pedidos)",
         "option"      => [
           "text"  => "Abrir pedido",
-          "url" => url('admin/purchase/edit/'.$purchase->id)
+          "url" => url('admin/purchase/edit/'.$purchase)
         ]
       ];
       sendMail::dispatch(new BasicMail($data),Business::find(1)->email);
