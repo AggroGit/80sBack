@@ -301,7 +301,7 @@ class User extends Authenticatable
         "ticket"      =>  "Resumen del Pedido (para ver descuentos ir al administrador de pedidos)",
         "option"      => [
           "text"  => "Abrir pedido",
-          "url" => url('admin/purchase/'.$purchase->id)
+          "url" => url('admin/purchase/edit/'.$purchase->id)
         ]
       ];
       sendMail::dispatch(new BasicMail($data),Business::find(1)->email);
