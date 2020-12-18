@@ -93,7 +93,7 @@ class Purchase extends Model
     {
       // para el negocio
 
-      $llevar = $this->take_away? "para llevar ";
+      $llevar = $this->take_away? "para llevar ":"";
       $discount = $this->discount_id == null?
       "" : ("con un descuento aplicado del ".$this->discount->percentage_dicount.'%');
       $data = [
