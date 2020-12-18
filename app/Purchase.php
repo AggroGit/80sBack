@@ -108,7 +108,7 @@ class Purchase extends Model
       ];
       sendMail::dispatch(new OrdersMail($this->orders,$this,$data),Business::find(1)->email);
       // cliente
-      $llevar = $this->take_away? "para llevar ";
+      $llevar = $this->take_away? "para llevar ":"";
       $discount = $this->discount_id == null?
       "" : ("con un descuento aplicado del ".$this->discount->percentage_dicount.'%');
       $data = [
