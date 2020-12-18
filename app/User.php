@@ -317,7 +317,7 @@ class User extends Authenticatable
         return true;
 
       } else {
-        auth()->user()->num_to_discount = auth()->user()->num_to_discount-1;
+        auth()->user()->num_to_discount = auth()->user()->num_to_discount+1;
         auth()->user()->save();
         return false;
       }
