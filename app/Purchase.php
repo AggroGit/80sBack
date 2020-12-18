@@ -274,6 +274,7 @@ class Purchase extends Model
     public  static function tabletate($data = null) {
       return [
         'headers' => [
+          'identificador' => 'id',
           'Creado el'  => 'created_at',
           'Estado'  => 'EstadoPedido',
           'Cobrado'  => 'total_price',
