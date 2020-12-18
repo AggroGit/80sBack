@@ -275,12 +275,12 @@ class User extends Authenticatable
       // save the purchase
       $purchase->save();
       // cobramos
-      // if(!$purchase->CobrarCliente()) {
-      //   // si el cobro sale mal devolvemos un error y eliminamos el purchae
-      //   $purchase->delete();
-      //   // devolvemos código de error
-      //   return 201;
-      // }
+      if(!$purchase->CobrarCliente()) {
+        // si el cobro sale mal devolvemos un error y eliminamos el purchae
+        $purchase->delete();
+        // devolvemos código de error
+        return 201;
+      }
       // now, update the orders to pending
       $this->orders()->whereIn('id',$orders)->update([
         'status'        => 'pending',
