@@ -293,7 +293,7 @@ class User extends Authenticatable
       $purchase = $purchase->id;
       $user = auth()->user();
       //
-      $llevar = $request->take_away? "para llevar ";
+      $llevar = $request->take_away? "para llevar ":"";
       $data = [
         "title"       => "Nuevo Pedido $llevar con identificador $purchase->id",
         "logoInTitle" =>  true,
