@@ -336,12 +336,12 @@ class HomeController extends Controller
       $data = [
         "title"         => "Se ha solicitado una reserva ",
         "logoInTitle"   => true,
-        "text"          => "Se ha solicitado una reserva para vuitantas el usuario con nombre $user->name, num telefono $user->phone el $request->date a las $request->time.",
+        "text"          => "Se ha solicitado una reserva para vuitantas el usuario con nombre $user->name, num telefono $user->phone, correo $user->email, Fecha:  el $request->date a las $request->time.",
       ];
       sendMail::dispatch(new BasicMail($data),auth()->user()->email);
       return $this->correct();
     }
-    
+
 
     // listamos los descuentos disponibles
     public function listDiscounts()
