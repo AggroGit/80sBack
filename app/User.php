@@ -225,6 +225,10 @@ class User extends Authenticatable
       // if(Business::find(1)->today->count() == 0) {
       //   return 811;
       // }
+      $business = Business::distance(auth()->user()->latitude, auth()->user()->longitude)->find(1);
+      if($business->distance >= 3.7) {
+        return 812;
+      }
       $cumple = false;
       $discount = null;
       $diezCompras = false;

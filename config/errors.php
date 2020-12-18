@@ -44,6 +44,7 @@ return [
     "809"   =>    "business have done this process",
     "810"   =>    "cant review more than 1",
     "811"   =>    "Business is closed",
+    "812"   =>    "Estas muy lejos",
 
     //900 products
     "900"   =>    "product not found",
