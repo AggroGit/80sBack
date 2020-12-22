@@ -49,7 +49,7 @@ trait Notify
         jobNotify::dispatch($this,$data);
       else
         jobNotify::dispatch($this,$data)->delay($delay);
-
+        
 
 
     }
