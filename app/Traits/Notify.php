@@ -20,10 +20,10 @@ trait Notify
 {
 
   // it sends the notification via socket or via push
-  public function send($data)
+  public function send($data,$delay=null)
   {
 
-    $this->sendPush($data);
+    $this->sendPush($data,$delay);
     // $this->sendSocket($data);
     return true;
 
@@ -42,10 +42,16 @@ trait Notify
 
   }
 
-  public function sendPush($data)
+  public function sendPush($data,$delay)
   {
     if($this->device_token !== null) {
-      jobNotify::dispatch($this,$data);
+      if($delay == null)
+        jobNotify::dispatch($this,$data);
+      else
+        jobNotify::dispatch($this,$data)->delay($delay);
+
+
+
     }
   }
 

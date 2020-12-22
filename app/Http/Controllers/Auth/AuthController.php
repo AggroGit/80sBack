@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Jobs\jobNotify;
 use App\Notification;
 use App\Association;
 use App\Purchase;
@@ -282,6 +283,14 @@ class AuthController extends Controller
           return $this->incorrect(15);
         }
         $user->birthday_changed = true;
+        $user->send([
+          "title"   => 'Descuento disponible',
+          "body"    => "¡Felicidades! durante el dia de hoy tienes un descuento en tus pedidos.",
+          "sound"   => "default",
+          "badge"   => 1,
+          "type"    => "discount"
+        ],$request->birthday);
+
       }
       $user->fill($request->all());
       // y la imagen
