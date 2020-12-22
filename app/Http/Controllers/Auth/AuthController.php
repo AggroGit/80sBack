@@ -279,7 +279,8 @@ class AuthController extends Controller
       //
       // si el usuario quiere cambiar la fecha de nacimiento
       if($request->has('birthday')) {
-        if($user->birthday_changed) {
+        echo "string";
+        if($user->birthday_changed == true) {
           return $this->incorrect(15);
         }
         $user->birthday_changed = true;
