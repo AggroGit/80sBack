@@ -53,7 +53,7 @@ class jobNotify implements ShouldQueue
         $c = new Client([
             'headers' => [
                 'Content-Type' => 'application/json',
-                'Authorization' => 'key='.$this->user->association->tokenFirebase(),
+                'Authorization' => 'key='.env('FIREBASE_TOKEN',''),
             ]
         ]);
         $r = $c->post('https://fcm.googleapis.com/fcm/send',
