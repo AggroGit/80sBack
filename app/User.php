@@ -26,7 +26,7 @@ class User extends Authenticatable
     //
     protected static $kilometers = true;
     //
-    protected $with = ['business','notifications','image','discount','birthday'];
+    protected $with = ['business','notifications','image','discount'];
     protected $appends = ['loggedSocial'];
 
     /**
