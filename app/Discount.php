@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use App\User;
+
 
 class Discount extends Model
 {
@@ -53,6 +55,23 @@ class Discount extends Model
     //   }
     //
     // }
+
+    public  static function boot() {
+        parent::boot();
+
+        static::created(function($model) {
+            $users = User::all();
+            foreach ($users as $user) {
+              $user->send([
+                "title"   => 'Descuento disponible',
+                "body"    => "¡Hay una oferta disponible del $model->percentage_dicount %, haz un pedido y aprovecha!",
+                "sound"   => "default",
+                "badge"   => 1,
+                "type"    => "discount"
+              ]);
+            }
+        });
+    }
 
     public  static function tabletate($data = null) {
       return [
