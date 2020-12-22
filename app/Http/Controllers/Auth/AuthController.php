@@ -284,13 +284,7 @@ class AuthController extends Controller
           return $this->incorrect(15);
         }
         $user->birthday_changed = true;
-        $user->send([
-          "title"   => 'Descuento disponible',
-          "body"    => "¡Felicidades! durante el dia de hoy tienes un descuento en tus pedidos.",
-          "sound"   => "default",
-          "badge"   => 1,
-          "type"    => "discount"
-        ],$request->birthday);
+        
 
       }
       $user->fill($request->all());
