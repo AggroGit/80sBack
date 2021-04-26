@@ -174,7 +174,8 @@ return [
       // 'take_away' => 'boolean',
       'type' => 'required|string|in:domicilio,llevar,en_restaurante',
       'pay_method' => 'string',
-      'comments' => 'string|nullable'
+      'comments' => 'string|nullable',
+      'reserve_at' => 'date_format:H:i|nullable'
 
     ],
     'buy_in_restaurant' => [

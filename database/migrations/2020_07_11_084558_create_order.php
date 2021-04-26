@@ -85,6 +85,7 @@ class CreateOrder extends Migration
             $table->integer('percentage_dicount')->nullable();
             $table->integer('payment_tries')->default(0);
             $table->timestamp('nextTry')->nullable();
+            $table->time('reserve_at')->nullable();
             $table->double('stripe_commisions', 8, 2)->nullable();
             $table->double('merco_commisions', 8, 2)->nullable();
             $table->text('comments')->nullable();

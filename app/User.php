@@ -280,6 +280,7 @@ class User extends Authenticatable
         "num_people"          => $request->num_people,
         "num_table"           => $request->num_table,
         'comments'            => $request->comments,
+        'reserve_at'          => $request->reserve_at
       ]);
       // save the purchase
       $purchase->save();
