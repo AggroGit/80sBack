@@ -282,6 +282,7 @@ class Purchase extends Model
         'headers' => [
           'identificador' => 'id',
           'Tipo' => 'type',
+          'Hora de reserva' => 'reserve_at',
           'Comentario' => 'comments',
           'Creado el'  => 'created_at',
           'Estado'  => 'EstadoPedido',
