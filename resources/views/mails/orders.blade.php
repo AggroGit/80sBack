@@ -1,6 +1,7 @@
 @extends('mails.email')
 
-
+<br>
+<br>
 @section('cssExtra')
 <style type="text/css">
 /* -------------------------------------
@@ -272,7 +273,6 @@ a {
 @endsection
 @section('content')
 
-
 <div class="container">
 
   <table border="0" width="100%" cellpadding="0" cellspacing="0" bgcolor="ffffff" class="bg_color">
@@ -346,6 +346,7 @@ a {
                                                               @endif
 
                                                             </td>
+                                                            <td>Comentario: {{$order->description}}</td>
                                                             <td class="alignright">€ {{$order->price}}</td>
                                                           </tr>
                                                           @endforeach
@@ -356,12 +357,33 @@ a {
                                                         </tr>
                                                         <tr>
                                                           <td>
-                                                            @if($purchase->pay_in_hand)
-                                                              Pago en mano 💰
+                                                            @if($purchase->pay_method == "credit_card")
+                                                              Pago con tarjeta 💳
                                                             @else
-                                                              Se cobrará con tarjeta 💳
+                                                            Pago en mano 💰 👋
                                                             @endif
                                                           </td>
+                                                        </tr>
+
+                                                        @if($purchase->type == "en_restaurante")
+                                                          <tr>
+                                                            <td>
+                                                              Numero de personas : {{$purchase->num_people}}
+
+                                                              @if($purchase->num_table !== null)
+                                                              <br>
+                                                                Numero de mesa: {{$purchase->num_table}}
+                                                              @endif
+
+
+                                                            </td>
+                                                          </tr>
+                                                        @endif
+                                                        <tr>
+                                                          @if($purchase->comments !== null)
+                                                          <br>
+                                                            Comentarios: {{$purchase->comments}}
+                                                          @endif
                                                         </tr>
                                                     </tbody>
                                                   </table>

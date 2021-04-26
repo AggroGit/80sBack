@@ -328,7 +328,6 @@
                             </table>
 
                             <table border="0" align="right" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="container590">
-
                                 <tr>
                                     <td align="center">
                                         <table align="center" border="0" cellpadding="0" cellspacing="0">

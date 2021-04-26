@@ -21,7 +21,7 @@ class Purchase extends Model
     //
     //
     protected $fillable = [
-      'user_id', 'total_price', 'stripe_payment_id', "birthday",'discount_id','10_buys_discount','percentage_dicount', 'take_away'
+      'user_id', 'total_price', 'stripe_payment_id', "birthday",'discount_id','10_buys_discount','percentage_dicount', 'take_away', 'num_table',"type",'num_people','num_table','pay_method','comments'
     ];
 
     protected $casts = [
@@ -93,17 +93,25 @@ class Purchase extends Model
     {
       // para el negocio
 
-      $llevar = $this->take_away? "para llevar ":"";
       $discount = $this->discount_id == null?
       "" : ("con un descuento aplicado del ".$this->discount->percentage_dicount.'%');
+      $llevar = "";
+      if($this->type == "domicilio")
+        $llevar = "a domicilio";
+      if($this->type == "llevar")
+        $llevar = "para llevar";
+      if($this->type == "en_restaurante")
+        $llevar = "para comer en restaurante";
+
+      $user = auth()->user();
       $data = [
-        "title"       => "Nuevo Pedido",
+        "title"       => "Nuevo Pedido $llevar con identificador $this->id",
         "logoInTitle" =>  true,
-        "text"        => "Tienes un pedido nuevo $discount, entra para gestionarlo y ver más detalles",
-        "ticket"      =>  "El Pedido",
+        "text"        => "Nuevo pedido $llevar de usuario con nombre $user->name a gestionar $discount. El identificador de pedido es $this->id",
+        "ticket"      =>  "Resumen del Pedido (para ver descuentos ir al administrador de pedidos)",
         "option"      => [
-          "text"  => "Ver pedido",
-          "url" => url('admin/purchase/')
+          "text"  => "Abrir pedido",
+          "url" => url('admin/purchase/edit/'.$this->id)
         ]
       ];
       sendMail::dispatch(new OrdersMail($this->orders,$this,$data),Business::find(1)->email);
@@ -112,14 +120,12 @@ class Purchase extends Model
       $discount = $this->discount_id == null?
       "" : ("con un descuento aplicado del ".$this->discount->percentage_dicount.'%');
       $data = [
-        "title"       => "Resumen de tu Pedido",
+        "title"       => "Resumen de tu Pedido $llevar",
         "logoInTitle" =>  true,
         "text"        => "Puedes ver más detalles a través de la app",
         "ticket"      =>  "Tu Pedido",
       ];
       sendMail::dispatch(new OrdersMail($this->orders,$this,$data),$this->user->email);
-
-
 
     }
 
@@ -275,12 +281,16 @@ class Purchase extends Model
       return [
         'headers' => [
           'identificador' => 'id',
+          'Tipo' => 'type',
+          'Comentario' => 'comments',
           'Creado el'  => 'created_at',
           'Estado'  => 'EstadoPedido',
           'Cobrado'  => 'total_price',
           'Comisión Stripe' => 'stripe_commisions',
           'Total Resultante'   => 'totalpurchase',
           'Dirección' => 'DirectionClient',
+          'Numero de mesa' => 'num_table',
+          'Numero de gente' => 'num_people',
           'Usuario' => [
             'model_name' => 'user',
             'select'     => User::all(), // data al seleccionar en crear

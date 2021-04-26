@@ -87,12 +87,21 @@ class CreateOrder extends Migration
             $table->timestamp('nextTry')->nullable();
             $table->double('stripe_commisions', 8, 2)->nullable();
             $table->double('merco_commisions', 8, 2)->nullable();
+            $table->text('comments')->nullable();
+            $table->string('type')
+                  ->default("domicilio"); // domicilio, llevar, en_restaurante
+            $table->integer('num_people')
+                  ->nullable()
+                  ->default(1);
+            $table->integer('num_table')->nullable();
             // solo será true cuando se efectúe las transferencias
             $table->boolean('completed')->default(false);
             $table->boolean('take_away')->default(false);
             $table->boolean('10_buys_discount')->default(false);
             $table->boolean('birthday')->default(false);
-            $table->boolean('pay_in_hand')->default(false);
+            /*DEPRECATED*/$table->boolean('pay_in_hand')->default(false);
+            $table->string('pay_method')
+                  ->default("credit_card");
             $table->integer('discount_id')
                   ->references('id')
                   ->on('discounts')

@@ -171,7 +171,16 @@ return [
     ],
 
     'buy'   =>    [
-      'take_away' => 'boolean',
+      // 'take_away' => 'boolean',
+      'type' => 'required|string|in:domicilio,llevar,en_restaurante',
+      'pay_method' => 'string',
+      'comments' => 'string|nullable'
+
+    ],
+    'buy_in_restaurant' => [
+      'pay_method' => 'required|string|in:pay_in_hand,credit_card',
+      'num_people' => 'integer|nullable',
+      'num_table'  => 'integer|nullable'
     ],
 
     'addCreditCard'   => [

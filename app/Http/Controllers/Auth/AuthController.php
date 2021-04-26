@@ -229,6 +229,11 @@ class AuthController extends Controller
       if ($missings = $this->hasError($request->all(),'validation.buy')) {
         return $this->incorrect(0,$missings);
       }
+      if($request->type == "en_restaurante") {
+        if ($missings = $this->hasError($request->all(),'validation.buy_in_restaurant')) {
+          return $this->incorrect(0,$missings);
+        }
+      }
       $purchase = null;
       if($error = auth()->user()->buyShoppingCart($request,$purchase) and $error !== true) {
         return $this->incorrect($error);
@@ -284,7 +289,7 @@ class AuthController extends Controller
           return $this->incorrect(15);
         }
         $user->birthday_changed = true;
-        
+
 
       }
       $user->fill($request->all());

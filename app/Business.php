@@ -129,7 +129,7 @@ class Business extends Model
       return $this->schedules()->orderBy('open_from')
       ->where('day',$this->getEquivalentDay())
       ->whereTime('open_from','<=',now())
-      ->whereTime('open_to','>=',now())
+      ->whereTime('open_to','>=',now()->addMinutes($this->time_to_cook))
       ->get();
 
     }
@@ -156,7 +156,7 @@ class Business extends Model
           return "s";
         break;
         case 'Sunday':
-        return "d";
+          return "d";
         break;
       }
     }
@@ -270,7 +270,8 @@ class Business extends Model
           'Url' => 'link',
           'lat' => 'latitude',
           'long' => 'longitude',
-          '% de Descuento décima compra' =>  'discount_on_ten'
+          '% de Descuento décima compra' =>  'discount_on_ten',
+          'Tiempo preparación de pedido (minutos)' => 'time_to_cook'
         ],
 
         'data'  =>  $data,

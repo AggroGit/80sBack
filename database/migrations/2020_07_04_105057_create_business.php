@@ -26,6 +26,7 @@ class CreateBusiness extends Migration
             $table->text('link')->nullable();
             $table->boolean('reserve')->default(false);
             $table->integer('discount_on_ten')->default(10);
+            $table->integer('time_to_cook')->default(0);
             //
             $table->boolean('verified')->default(false);
             $table->integer('association_id')

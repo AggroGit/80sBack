@@ -225,6 +225,7 @@ class User extends Authenticatable
       // if(Business::find(1)->today->count() == 0) {
       //   return 811;
       // }
+      // dd($request->all());
       $business = Business::distance(auth()->user()->latitude, auth()->user()->longitude)->find(1);
       if($business->distance >= 3.7) {
         return 812;
@@ -272,19 +273,26 @@ class User extends Authenticatable
         "stripe_payment_id"   => $charge_id,
         "birthday"            => $cumple, // si se ha aplicado cumpleaños
         "10_buys_discount"    => $diezCompras,
-        "take_away"           => $request->take_away?? false,
+        "type"                => $request->type,
         "percentage_dicount"  => $discount->percentage_dicount?? null,
-        "discount_id"         => auth()->user()->discount->id?? null // si se ha aplicado descuento
+        "pay_method"          => $request->pay_method?? "credit_card",
+        "discount_id"         => auth()->user()->discount->id?? null, // si se ha aplicado descuento
+        "num_people"          => $request->num_people,
+        "num_table"           => $request->num_table,
+        'comments'            => $request->comments,
       ]);
       // save the purchase
       $purchase->save();
       // cobramos
-      if(!$purchase->CobrarCliente()) {
-        // si el cobro sale mal devolvemos un error y eliminamos el purchae
-        $purchase->delete();
-        // devolvemos código de error
-        return 201;
+      if($request->type == "domicilio" or $request->type =="llevar" or $request->pay_method == "credit_card") {
+        if(!$purchase->CobrarCliente()) {
+          // si el cobro sale mal devolvemos un error y eliminamos el purchae
+          $purchase->delete();
+          // devolvemos código de error
+          return 201;
+        }
       }
+
       // now, update the orders to pending
       $this->orders()->whereIn('id',$orders)->update([
         'status'        => 'pending',
@@ -295,20 +303,28 @@ class User extends Authenticatable
       $purchase->mails();
       // paso de referencia
       $purchase = $purchase->id;
-      $user = auth()->user();
+
+      // $user = auth()->user();
       //
-      $llevar = $request->take_away? "para llevar ":"";
-      $data = [
-        "title"       => "Nuevo Pedido $llevar con identificador $purchase",
-        "logoInTitle" =>  true,
-        "text"        => "Nuevo pedido $llevar de usuario con nombre $user->name a gestionar. El identificador de pedido es $purchase",
-        "ticket"      =>  "Resumen del Pedido (para ver descuentos ir al administrador de pedidos)",
-        "option"      => [
-          "text"  => "Abrir pedido",
-          "url" => url('admin/purchase/edit/'.$purchase)
-        ]
-      ];
-      sendMail::dispatch(new BasicMail($data),Business::find(1)->email);
+      // $llevar = "";
+      // if($request->type == "domicilio")
+      //   $llevar = "a domicilio";
+      // if($request->type == "llevar")
+      //   $llevar = "para llevar";
+      // if($request->type == "en_restaurante")
+      //   $llevar = "para comer en restaurante";
+
+      // $data = [
+      //   "title"       => "Nuevo Pedido $llevar con identificador $purchase",
+      //   "logoInTitle" =>  true,
+      //   "text"        => "Nuevo pedido $llevar de usuario con nombre $user->name a gestionar. El identificador de pedido es $purchase",
+      //   "ticket"      =>  "Resumen del Pedido (para ver descuentos ir al administrador de pedidos)",
+      //   "option"      => [
+      //     "text"  => "Abrir pedido",
+      //     "url" => url('admin/purchase/edit/'.$purchase)
+      //   ]
+      // ];
+      // sendMail::dispatch(new BasicMail($data),Business::find(1)->email);
 
       return true;
     }
