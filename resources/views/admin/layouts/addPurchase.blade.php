@@ -2,12 +2,12 @@
 
 @section('content')
 <div class="container-fluid">
-    <h1 class="mt-4">Pedido 0000{{$purchase->id}}</h1>
+    <h1 class="mt-4">Pedido 0000{{$purchase->id?? ''}}</h1>
     <br>
     <div class="card mb-4">
         <div class="card-header">
             <i class="fas fa-table mr-1"></i>
-            Pedido 0000{{$purchase->id}}
+            Pedido 0000{{$purchase->id?? ''}}
         </div>
         <div class="card-body">
           <div class="card-body">
@@ -17,19 +17,19 @@
                     <div class="container">
                       <div class="row">
                         <div class="col-md-6">
-                          <strong>Pedido numero</strong>: 0000{{$purchase->id}}
+                          <strong>Pedido numero</strong>: 0000{{$purchase->id?? ''}}
                         </div>
                         <div class="col-md-6">
-                          <strong>Tipo de pedido: </strong> {{$purchase->type}}
+                          <strong>Tipo de pedido: </strong> {{$purchase->type?? ''}}
                         </div>
                         <div class="col-md-6">
-                          <strong>Número de personas: </strong> {{$purchase->num_people}}
+                          <strong>Número de personas: </strong> {{$purchase->num_people?? ''}}
                         </div>
                         <div class="col-md-6">
-                          <strong>Comentarios: </strong> {{$purchase->comments}}
+                          <strong>Comentarios: </strong> {{$purchase->comments?? ''}}
                         </div>
                         <div class="col-md-6">
-                          <strong>Número de mesa: </strong> {{$purchase->num_table}}
+                          <strong>Número de mesa: </strong> {{$purchase->num_table?? ''}}
                         </div>
                         <div class="col-md-6">
                           <strong>Descuento de cumpleaños</strong>: @if($purchase->birthday) Sí @else No @endif
@@ -76,10 +76,10 @@
                           <tbody>
                             @foreach($purchase->orders as $order)
                               <tr>
-                                <td>{{$order->product->name}}</td>
-                                <td>{{$order->description}}</td>
-                                <td>{{$order->quantity}} x {{$order->howmuch}}</td>
-                                <td class="text-right">{{$order->price}} €</td>
+                                <td>{{$order->product->name?? ''}}</td>
+                                <td>{{$order->description?? ''}}</td>
+                                <td>{{$order->quantity ?? ''}} x {{$order->howmuch?? ''}}</td>
+                                <td class="text-right">{{$order->price?? ''}} €</td>
                               </tr>
                             @endforeach
                             @if($purchase->discount)
@@ -87,14 +87,14 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td class="text-right">Descuento: {{$purchase->discount->percentage_dicount}}% </td>
+                                <td class="text-right">Descuento: {{$purchase->discount->percentage_dicount?? ''}}% </td>
                               </tr>
                             @endif
                             <tr>
                               <td></td>
                               <td></td>
                               <td></td>
-                              <td class="text-right">Total: {{$purchase->total_price}}€</td>
+                              <td class="text-right">Total: {{$purchase->total_price?? ''}}€</td>
                             </tr>
                           </tbody>
                         </table>

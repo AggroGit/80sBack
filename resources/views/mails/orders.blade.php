@@ -339,7 +339,7 @@ a {
                                                           <tr>
                                                             <td>
                                                               {{$order->quantity}} x
-                                                              {{$order->product->name}}
+                                                              {{$order->product->name?? ''}}
                                                               ({{$order->product->price }} € /  {{$order->price_per}} )
                                                               @if($order->price_per !== "unit" && $order->price_per !=="pack_of_units")
                                                                 x {{$order->howmuch}} {{$order->price_per}}
