@@ -338,7 +338,7 @@ a {
                                                           @foreach($orders as $order)
                                                           <tr>
                                                             <td>
-                                                              {{$order->quantity}} x
+                                                              {{$order->quantity?? ''}} x
                                                               {{$order->product->name?? ''}}
                                                               ({{$order->product->price }} € /  {{$order->price_per}} )
                                                               @if($order->price_per !== "unit" && $order->price_per !=="pack_of_units")
@@ -379,6 +379,16 @@ a {
                                                             </td>
                                                           </tr>
                                                         @endif
+
+
+                                                        @if($purchase->type == "llevar")
+                                                          <tr>
+                                                            <td>
+                                                              Hora de reserva : {{$purchase->reserve_at}}
+                                                            </td>
+                                                          </tr>
+                                                        @endif
+
                                                         <tr>
                                                           @if($purchase->comments !== null)
                                                           <br>
