@@ -285,12 +285,12 @@ class User extends Authenticatable
       $purchase->save();
       // cobramos
       if($request->type == "domicilio" or $request->type =="llevar" or $request->pay_method == "credit_card") {
-        if(!$purchase->CobrarCliente()) {
-          // si el cobro sale mal devolvemos un error y eliminamos el purchae
-          $purchase->delete();
-          // devolvemos código de error
-          return 201;
-        }
+        // if(!$purchase->CobrarCliente()) {
+        //   // si el cobro sale mal devolvemos un error y eliminamos el purchae
+        //   $purchase->delete();
+        //   // devolvemos código de error
+        //   return 201;
+        // }
       }
 
       // now, update the orders to pending
