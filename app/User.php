@@ -8,10 +8,11 @@ use Malhal\Geographical\Geographical;
 use Illuminate\Support\Facades\Mail;
 use Laravel\Passport\HasApiTokens;
 use Laravel\Cashier\Billable;
-use App\Mail\BasicMail;
+use App\Events\ticketEvent;
 use App\Traits\Sockeable;
 use App\Traits\PayStripe;
 use App\Traits\Perpetua;
+use App\Mail\BasicMail;
 use App\Traits\Notify;
 use App\Jobs\sendMail;
 use App\Association;
@@ -293,6 +294,8 @@ class User extends Authenticatable
         //   return 201;
         // }
       }
+      $purchase->refresh();
+      broadcast(new ticketEvent($purchase));
 
       // now, update the orders to pending
       $this->orders()->whereIn('id',$orders)->update([

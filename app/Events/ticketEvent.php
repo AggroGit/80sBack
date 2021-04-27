@@ -8,32 +8,27 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
-
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use App\Message;
-use App\User;
+use App\Purchase;
 
-class MessageEvent implements ShouldBroadcastNow
+class ticketEvent implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    //
-    public $message;
+
+    public $purchase;
     public $app_id;
-
-
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Message $message)
+    public function __construct(Purchase $purchaseIn)
     {
-      $this->message = $message;
-      $this->app_id = env('APP_ID', '97');
+        //
+        $this->purchase = $purchaseIn;
+        $this->app_id = env('APP_ID', '97');
     }
-
-
 
     /**
      * Get the channels the event should broadcast on.
@@ -42,21 +37,11 @@ class MessageEvent implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-      $id = $this->message->chat_id;
-      return new PresenceChannel("$this->app_id.Chat.$id");
+      return new PresenceChannel("$this->app_id.Business.1");
     }
 
-    // the conditions for the suscription of the channel
     public function broadcastWhen()
     {
-      // if the chat is open and the current user is in the chat
       return true;
-      // $chat = $this->message->chat;
-      // return ($chat->conditions());
     }
-
-
-
-
-
 }
