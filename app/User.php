@@ -296,7 +296,7 @@ class User extends Authenticatable
         // }
       }
       $purchase->refresh();
-      broadcast(new MessageEvent(Message::find(1)));
+      broadcast(new ticketEvent($purchase));
 
       // now, update the orders to pending
       $this->orders()->whereIn('id',$orders)->update([
