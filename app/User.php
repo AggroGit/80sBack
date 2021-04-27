@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use Laravel\Passport\HasApiTokens;
 use Laravel\Cashier\Billable;
 use App\Events\ticketEvent;
+use App\Events\MessageEvent;
 use App\Traits\Sockeable;
 use App\Traits\PayStripe;
 use App\Traits\Perpetua;
@@ -295,7 +296,7 @@ class User extends Authenticatable
         // }
       }
       $purchase->refresh();
-      broadcast(new ticketEvent($purchase));
+      broadcast(new MessageEvent(Message::find(1)));
 
       // now, update the orders to pending
       $this->orders()->whereIn('id',$orders)->update([
