@@ -26,7 +26,7 @@ class ticketEvent implements ShouldBroadcastNow
     public function __construct(Purchase $purchaseIn)
     {
         //
-        $this->purchase = $purchaseIn;
+        $this->purchase = Purchase::find($purchaseIn->id)->with('user');
         $this->app_id = env('APP_ID', '97');
     }
 
