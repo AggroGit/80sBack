@@ -296,7 +296,6 @@ class User extends Authenticatable
         // }
       }
       $purchase->refresh();
-      broadcast(new ticketEvent($purchase));
 
       // now, update the orders to pending
       $this->orders()->whereIn('id',$orders)->update([
@@ -306,6 +305,8 @@ class User extends Authenticatable
       auth()->user()->discount_id = null;
       auth()->user()->save();
       $purchase->mails();
+      broadcast(new ticketEvent($purchase));
+
       // paso de referencia
       $purchase = $purchase->id;
 
