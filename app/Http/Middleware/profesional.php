@@ -21,11 +21,11 @@ class profesional
         if (auth()->user()->type == "admin") {
           return $next($request);
         }
-        // que sea administrador
-        if(!$business->isAdmin(auth()->user())) {
-          return app()->call('App\Http\Controllers\profesionalController@incorrect',
-                              ['code'=> 4]);
-        }
+        // // que sea administrador
+        // if(!$business->isAdmin(auth()->user())) {
+        //   return app()->call('App\Http\Controllers\profesionalController@incorrect',
+        //                       ['code'=> 4]);
+        // }
         return $next($request);
     }
 }
