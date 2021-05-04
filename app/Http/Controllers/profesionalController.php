@@ -159,11 +159,11 @@ class profesionalController extends Controller
     public function history($business_id)
     {
 
-
+      $purchases_exists = Purchase::all()->pluck('id');
       $orders_pendings = Order::with('purchase')->where([
         ['business_id',$business_id],
         ['status','pending'],
-      ])->get()->groupBy('purchase_id')->toArray();
+      ])->whereIn('purchase_id',$purchases_exists)->get()->groupBy('purchase_id')->toArray();
       $pendings = [];
       foreach ($orders_pendings as $purchase_id => $orders) {
         if($purchase = Purchase::with('user')->find($purchase_id)->toArray()) {
