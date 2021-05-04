@@ -120,6 +120,7 @@ class Order extends Model
     public function createFromRequest($request)
     {
       $this->product_id = $request->product_id;
+      $request->description = $this->remove_emoji($request->description);
       // now fill
       $this->fill($request->all());
       $this->user_id = auth()->user()->id;
@@ -127,6 +128,31 @@ class Order extends Model
       $this->is_offer = $this->isAnOffer();
       $this->calcPrice(); // it save
 
+    }
+
+    function remove_emoji($string) {
+
+        // Match Emoticons
+        $regex_emoticons = '/[\x{1F600}-\x{1F64F}]/u';
+        $clear_string = preg_replace($regex_emoticons, '', $string);
+
+        // Match Miscellaneous Symbols and Pictographs
+        $regex_symbols = '/[\x{1F300}-\x{1F5FF}]/u';
+        $clear_string = preg_replace($regex_symbols, '', $clear_string);
+
+        // Match Transport And Map Symbols
+        $regex_transport = '/[\x{1F680}-\x{1F6FF}]/u';
+        $clear_string = preg_replace($regex_transport, '', $clear_string);
+
+        // Match Miscellaneous Symbols
+        $regex_misc = '/[\x{2600}-\x{26FF}]/u';
+        $clear_string = preg_replace($regex_misc, '', $clear_string);
+
+        // Match Dingbats
+        $regex_dingbats = '/[\x{2700}-\x{27BF}]/u';
+        $clear_string = preg_replace($regex_dingbats, '', $clear_string);
+
+        return $clear_string;
     }
 
     // return if the price is an offer
