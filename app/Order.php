@@ -120,9 +120,11 @@ class Order extends Model
     public function createFromRequest($request)
     {
       $this->product_id = $request->product_id;
-      $request->description = $this->remove_emoji($request->description);
       // now fill
       $this->fill($request->all());
+      //
+      $this->description = $this->remove_emoji($request->description);
+      //
       $this->user_id = auth()->user()->id;
       $this->price_per = $this->product->price_per;
       $this->is_offer = $this->isAnOffer();
