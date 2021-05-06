@@ -224,14 +224,14 @@ class User extends Authenticatable
     public function buyShoppingCart($request, &$purchase)
     {
       // solo si la hora del local se ecncuentra dentro
-      // if(Business::find(1)->today->count() == 0) {
-      //   return 811;
-      // }
+      if(Business::find(1)->today->count() == 0) {
+        return 811;
+      }
       // dd($request->all());
       $business = Business::distance(auth()->user()->latitude, auth()->user()->longitude)->find(1);
-      // if($business->distance >= 3.7) {
-      //   return 812;
-      // }
+      if($business->distance >= 3.7) {
+        return 812;
+      }
       $cumple = false;
       $discount = null;
       $diezCompras = false;
@@ -288,12 +288,12 @@ class User extends Authenticatable
       $purchase->save();
       // cobramos
       if($request->type == "domicilio" or $request->type =="llevar" or $request->pay_method == "credit_card") {
-        // if(!$purchase->CobrarCliente()) {
-        //   // si el cobro sale mal devolvemos un error y eliminamos el purchae
-        //   $purchase->delete();
-        //   // devolvemos código de error
-        //   return 201;
-        // }
+        if(!$purchase->CobrarCliente()) {
+          // si el cobro sale mal devolvemos un error y eliminamos el purchae
+          $purchase->delete();
+          // devolvemos código de error
+          return 201;
+        }
       }
       $purchase->refresh();
 
