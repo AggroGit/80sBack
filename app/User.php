@@ -229,7 +229,7 @@ class User extends Authenticatable
       }
       // dd($request->all());
       $business = Business::distance(auth()->user()->latitude, auth()->user()->longitude)->find(1);
-      if($business->distance >= 3.7) {
+      if($business->distance >= 6) {
         return 812;
       }
       $cumple = false;
