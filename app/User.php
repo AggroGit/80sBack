@@ -243,7 +243,7 @@ class User extends Authenticatable
       }
       $price = $this->shoppingCart->sum('price');
       // si es su cumpleaños le hacemos una ofert
-      if(($price < env('MIN_BUY',5))) {
+      if(($price < env('MIN_BUY',12))) {
         return 205;
       }
       // si el usuario tiene un descuento, vemos si es valido y lo aplicamos
@@ -255,7 +255,6 @@ class User extends Authenticatable
 
       // oferta
       if(auth()->user()->birthday and Carbon::parse(auth()->user()->birthday)->isBirthday()) {
-
         $price = round($price*0.9,2);
         $cumple = true;
       }
