@@ -243,7 +243,7 @@ class User extends Authenticatable
       }
       $price = $this->shoppingCart->sum('price');
       // si es su cumpleaños le hacemos una ofert
-      if(($price < env('MIN_BUY',12))) {
+      if(($price < env('MIN_BUY',12) && $request->pay_method == "credit_card")) {
         return 205;
       }
       // si el usuario tiene un descuento, vemos si es valido y lo aplicamos
